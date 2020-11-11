@@ -1,0 +1,32 @@
+{
+  "name": "other-products-scroll",
+  "version": "1.0.0",
+  "description": "> Project description",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.2.0"
+  },
+  "devDependencies": {
+    "faker": "^5.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js -w",
+    "seed-dev": "mysql -u root < database/schema.sql -pcheeze && node ./database/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hack-Reactor-Team-Lannister/other-products-scroll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hack-Reactor-Team-Lannister/other-products-scroll/issues"
+  },
+  "homepage": "https://github.com/Hack-Reactor-Team-Lannister/other-products-scroll#readme"
+}
