@@ -10,36 +10,36 @@ CREATE TABLE products (
   image_two_url text,
   page_url text,
   price int,
-  avg_rating int,
-  num_ratings int,
   hearted boolean,
   brief_description text,
   collection_name varchar(255)
 );
 
+CREATE TABLE users (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  username varchar(50)
+);
+
 CREATE TABLE ratings (
-  id int PRIMARY KEY,
-  username varchar(255),
+  id int PRIMARY KEY AUTO_INCREMENT,
+  user_id int,
   rated_product int,
   stars_given int
 );
 
-CREATE TABLE users (
-  id int PRIMARY KEY AUTO_INCREMENT,
-  username varchar(50),
-  favorites_id int
-);
 
-CREATE TABLE favorites (
-  id int PRIMARY KEY AUTO_INCREMENT,
-  user_id int,
-  product_id int
-);
 
-ALTER TABLE favorites ADD FOREIGN KEY (user_id) REFERENCES users(id);
-ALTER TABLE favorites ADD FOREIGN KEY (product_id) REFERENCES products(id);
-ALTER TABLE users ADD FOREIGN KEY (favorites_id) REFERENCES favorites(id);
+-- CREATE TABLE favorites (
+--   id int PRIMARY KEY AUTO_INCREMENT,
+--   user_id int,
+--   product_id int
+-- );
+
+-- ALTER TABLE favorites ADD FOREIGN KEY (user_id) REFERENCES users(id);
+-- ALTER TABLE favorites ADD FOREIGN KEY (product_id) REFERENCES products(id);
+-- ALTER TABLE users ADD FOREIGN KEY (favorites_id) REFERENCES favorites(id);
 ALTER TABLE ratings ADD FOREIGN KEY (rated_product) REFERENCES products(id);
+ALTER TABLE ratings ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 -- /*
