@@ -11,7 +11,8 @@ const PORT = config.prod_port || config.dev_port;
 app.use(bodyParser.json());
 
 app.get('/api/products', products_controller.getAll);
-app.get('/api/products/id=:id', products_controller.getById)
+app.get('/api/products/id=:id', products_controller.getById);
+app.get('/api/products/similar/id=:id', products_controller.getSimilarDescription);
 
 app.get('/api/ratings', ratings_controller.getAll);
 app.get('/api/ratings/count/product_id=:id', ratings_controller.getCountByProduct);

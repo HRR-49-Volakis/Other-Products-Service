@@ -2,30 +2,6 @@
 const { connection } = require(__dirname + '/../../database/db.js');
 
 
-
-
-function getAll() {
-
-  const statement = `SELECT * FROM products`
-
-  return new Promise((resolve, reject) => {
-    connection.query(statement, (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    })
-  });
-}
-
-function getById(id) {
-  const statement = `SELECT * FROM products WHERE id=?`
-  return new Promise((resolve, reject) => {
-    connection.query(statement, [id], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    })
-  });
-}
-
 function createProduct(data) {
   const values = [
       data.product_name,
@@ -49,11 +25,50 @@ function createProduct(data) {
         resolve(result);
       })
     });
-}
+};
+
+function getAll() {
+  const statement = `SELECT * FROM products`;
+  return new Promise((resolve, reject) => {
+    connection.query(statement, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  });
+};
+
+function getById(id) {
+  const statement = `SELECT * FROM products WHERE id=?`;
+  const values = [id];
+  return new Promise((resolve, reject) => {
+    connection.query(statement, values, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  });
+};
+
+function getSimilarDescription(id) {
+  const first_statement = `SELECT brief_description FROM products WHERE id=?;`;
+  const second_statement = `SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?);`;
+  return new Promise((resolve, reject) => {
+    connection.query(first_statement, [id], (err, [product]) => {
+      if (err) return reject(err);
+      connection.query(second_statement, [product.brief_description], (err, result) =>{
+        if (err) return reject(err);
+        resolve(result);
+      });
+    });
+  });
+};
+
+
+
 
 
 module.exports = {
   createProduct,
   getAll,
-  getById
+  getById,
+  getSimilarDescription
 }

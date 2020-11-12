@@ -20,8 +20,18 @@ function getById(req, res) {
     })
 }
 
+function getSimilarDescription(req, res) {
+  products_model.getSimilarDescription(req.params.id)
+    .then(results => res.send(results))
+    .catch(err => {
+      console.log('Failed to getSimilarDescription products msg-', err.message);
+      res.status(500);
+      res.end();
+    })
+}
 
 module.exports = {
   getAll,
-  getById
+  getById,
+  getSimilarDescription
 }

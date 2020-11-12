@@ -28,49 +28,24 @@ CREATE TABLE ratings (
 );
 
 
-
-
--- CREATE TABLE favorites (
---   id int PRIMARY KEY AUTO_INCREMENT,
---   user_id int,
---   product_id int
--- );
-
--- ALTER TABLE favorites ADD FOREIGN KEY (user_id) REFERENCES users(id);
--- ALTER TABLE favorites ADD FOREIGN KEY (product_id) REFERENCES products(id);
--- ALTER TABLE users ADD FOREIGN KEY (favorites_id) REFERENCES favorites(id);
 ALTER TABLE ratings ADD FOREIGN KEY (rated_product) REFERENCES products(id);
 ALTER TABLE ratings ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
-
--- /*
---  * Schema design https://dbdiagram.io/d/5fab21e43a78976d7b7b5d68
--- */
-
-
--- INSERT INTO products (
---   image_one_url,
---   image_two_url,
---   page_url,
---   product_name,
---   price,
---   avg_rating,
---   num_ratings,
---   hearted,
---   brief_description,
---   collection_name)
---   VALUES (
---     "wwwwww1",
---     "wwwwww2",
---     "wwwwww3",
---     "DJUNGELSKOG",
---     "35",
---     "5",
---     "61",
---     false,
---     "Soft toy, brown bear",
---     "DJUNGELSKOG"
---   );
+--create a FULLTEXT index to match product descriptsion
+--https://database.guide/how-the-match-function-works-in-mysql/#:~:text=In%20MySQL%2C%20the%20MATCH(),table%20columns%20to%20be%20searched.
+ALTER TABLE products ADD FULLTEXT(brief_description);
 
 
 
+
+
+
+
+SELECT a.*
+FROM products a
+WHERE MATCH(a.brief_description) AGAINST (b);
+
+SELECT a.brief_description as a, (SELECT brief_description
+  FROM products
+  WHERE id = 8) as b
+FROM products a
