@@ -1,16 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const config = require('/config');
-
+const db = require(__dirname + '/../database/db.js');
+const config = require(__dirname + '/../config.js');
+const products_controller = require(__dirname + '/controllers/products.js');
+const ratings_controller = require(__dirname + '/controllers/ratings.js');
 
 const app = express();
-const port = config.prod_port || config.dev_port;
+const PORT = config.prod_port || config.dev_port;
 
 app.use(bodyParser.json());
 
+app.get('/api/products', products_controller.getAll);
+app.get('/api/products/id=:id', products_controller.getById)
+
+app.get('/api/ratings', ratings_controller.getAll);
+app.get('/api/ratings/count/product_id=:id', ratings_controller.getCountByProduct);
+app.get('/api/ratings/avg/product_id=:id', ratings_controller.getAvgRatingByProduct);
 //app.use(express.startic())
 
-// app.get('/api/products', req, res) => {
+app.listen(PORT, (err, result)=> {
+  if (err) return console.log('eror starting express msg-', err.message);
+  console.log('Express server listening on port-', PORT);
+})
 
-// }

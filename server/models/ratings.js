@@ -20,6 +20,43 @@ function createRating(data) {
   });
 }
 
+function getAll() {
+  const statement = `SELECT * FROM ratings`;
+  return new Promise((resolve, reject) => {
+    connection.query(statement, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  })
+}
+
+function getCountByProduct(id) {
+  const statement = `SELECT count(id) as times_rated FROM ratings WHERE rated_product=?;`;
+  const values = [id];
+  return new Promise((resolve, reject) => {
+    connection.query(statement,values, (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    })
+  })
+}
+
+function getAvgRatingByProduct(id) {
+  const statement = `SELECT AVG(stars_given) as average_stars FROM ratings WHERE rated_product = ?;`;
+  const values = [id];
+  return new Promise((resolve, reject) => {
+    connection.query(statement, values, (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    })
+  })
+}
+
+
+
 module.exports = {
-  createRating
+  createRating,
+  getAll,
+  getCountByProduct,
+  getAvgRatingByProduct
 }

@@ -2,6 +2,30 @@
 const { connection } = require(__dirname + '/../../database/db.js');
 
 
+
+
+function getAll() {
+
+  const statement = `SELECT * FROM products`
+
+  return new Promise((resolve, reject) => {
+    connection.query(statement, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  });
+}
+
+function getById(id) {
+  const statement = `SELECT * FROM products WHERE id=?`
+  return new Promise((resolve, reject) => {
+    connection.query(statement, [id], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  });
+}
+
 function createProduct(data) {
   const values = [
       data.product_name,
@@ -22,12 +46,14 @@ function createProduct(data) {
     return new Promise((resolve, reject) => {
       connection.query(statement, values, (err, result) => {
         if(err) return reject(err);
-        else resolve(result);
+        resolve(result);
       })
     });
 }
 
 
 module.exports = {
-  createProduct
+  createProduct,
+  getAll,
+  getById
 }

@@ -29,6 +29,7 @@ CREATE TABLE ratings (
 
 
 
+
 -- CREATE TABLE favorites (
 --   id int PRIMARY KEY AUTO_INCREMENT,
 --   user_id int,
