@@ -38,14 +38,3 @@ ALTER TABLE products ADD FULLTEXT(brief_description);
 
 
 
-
-
-
-SELECT a.*
-FROM products a
-WHERE MATCH(a.brief_description) AGAINST (b);
-
-SELECT a.brief_description as a, (SELECT brief_description
-  FROM products
-  WHERE id = 8) as b
-FROM products a

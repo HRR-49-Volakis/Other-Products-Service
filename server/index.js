@@ -19,8 +19,14 @@ app.get('/api/ratings/count/product_id=:id', ratings_controller.getCountByProduc
 app.get('/api/ratings/avg/product_id=:id', ratings_controller.getAvgRatingByProduct);
 //app.use(express.startic())
 
-app.listen(PORT, (err, result)=> {
-  if (err) return console.log('eror starting express msg-', err.message);
-  console.log('Express server listening on port-', PORT);
-})
+module.exports = {
+  app
+}
+
+// move the below app.listen to start.js in order to use app in testing aswell
+
+// app.listen(PORT, (err, result)=> {
+//   if (err) return console.log('eror starting express msg-', err.message);
+//   console.log('Express server listening on port-', PORT);
+// })
 

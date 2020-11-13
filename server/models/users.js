@@ -8,6 +8,7 @@ function createUser(data) {
   ]
   const statement = `INSERT INTO users (username) VALUES (?);`;
 
+
   return new Promise((resolve, reject) => {
     connection.query(statement, values, (err, results) => {
       if (err) return reject(err);
