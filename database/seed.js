@@ -6,10 +6,9 @@ const products_model = require('../server/models/products.js');
 const ratings_model = require('../server/models/ratings.js');
 const users_model = require('../server/models/users.js');
 
+
 const user = config.prod_username || config.dev_username;
 const pass = config.prod_password || config.dev_password;
-
-
 
 seed();
 
@@ -45,7 +44,7 @@ function init_empty_db() {
   });
 }
 
-function products_seed() {
+async function products_seed() {
   const promises = [];
   for(let i = 0; i < 100; i++) {
     const data = {
@@ -58,24 +57,35 @@ function products_seed() {
       brief_description: faker.commerce.productDescription(),
       collection_name: faker.commerce.department()
     };
-    promises.push(products_model.createProduct(data));
+    try {
+      let result = await products_model.createProduct(data);
+      promises.push(result);
+    } catch (err) {
+      return console.log(err.message)
+    }
   }
-  return Promise.all(promises)
+  return promises;
+  //return Promise.all(promises)
 }
 
-function users_seed() {
+async function users_seed() {
   const promises = [];
   for (let i = 0; i < 200; i++) {
     const data = {
       username: faker.internet.userName()
     }
-    promises.push(users_model.createUser(data))
+    try {
+      let result = await users_model.createUser(data);
+      promises.push(result);
+    } catch (err) {
+      return console.log(err.message)
+    }
   }
-  console.log('returning promises?')
-  return Promise.all(promises);
+  return promises;
+  //return Promise.all(promises)
 }
 
-function ratings_seed() {
+async function ratings_seed() {
   const promises = [];
   for(let i = 0; i < 1000; i++) {
     const data = {
@@ -83,7 +93,13 @@ function ratings_seed() {
       rated_product: faker.random.number({'min':1, 'max':100}), //rated_product
       stars_given: faker.random.number({'min':1, 'max':5}) //stars_given
     }
-    promises.push(ratings_model.createRating(data));
+    try {
+      let result = await ratings_model.createRating(data);
+      promises.push(result);
+    } catch (err) {
+      return console.log(err.message)
+    }
   }
-  return Promise.all(promises);
+  return promises;
+  //return Promise.all(promises);
 }

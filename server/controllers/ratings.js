@@ -1,5 +1,6 @@
 const ratings_model = require(__dirname + '/../models/ratings.js');
 
+
 function getAll(req, res) {
   ratings_model.getAll()
     .then(results => res.send(results))
