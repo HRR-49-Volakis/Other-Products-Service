@@ -1,74 +1,68 @@
-
-const { connection } = require(__dirname + '/../../database/db.js');
-
+const { connection } = require('../../database/db.js');
 
 function createProduct(data) {
   const values = [
-      data.product_name,
-      data.image_one_url,
-      data.image_two_url,
-      data.page_url,
-      data.price,
-      data.hearted,
-      data.brief_description,
-      data.collection_name
-  ]
+    data.product_name,
+    data.image_one_url,
+    data.image_two_url,
+    data.page_url,
+    data.price,
+    data.hearted,
+    data.brief_description,
+    data.collection_name,
+  ];
   const statement = `
     INSERT INTO products
     (product_name, image_one_url, image_two_url,
       page_url, price,hearted, brief_description,
       collection_name)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
-    return new Promise((resolve, reject) => {
-      connection.query(statement, values, (err, result) => {
-        if(err) return reject(err);
-        resolve(result);
-      })
+  return new Promise((resolve, reject) => {
+    connection.query(statement, values, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
     });
-};
+  });
+}
 
 function getAll() {
-  const statement = `SELECT * FROM products`;
+  const statement = 'SELECT * FROM products';
   return new Promise((resolve, reject) => {
     connection.query(statement, (err, result) => {
       if (err) return reject(err);
-      resolve(result);
-    })
+      return resolve(result);
+    });
   });
-};
+}
 
 function getById(id) {
-  const statement = `SELECT * FROM products WHERE id=?`;
+  const statement = 'SELECT * FROM products WHERE id=?';
   const values = [id];
   return new Promise((resolve, reject) => {
     connection.query(statement, values, (err, result) => {
       if (err) return reject(err);
-      resolve(result);
-    })
+      return resolve(result);
+    });
   });
-};
+}
 
 function getSimilarDescription(id) {
-  const first_statement = `SELECT brief_description FROM products WHERE id=?;`;
-  const second_statement = `SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?);`;
+  const firstStatement = 'SELECT brief_description FROM products WHERE id=?;';
+  const secondStatement = 'SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?);';
   return new Promise((resolve, reject) => {
-    connection.query(first_statement, [id], (err, [product]) => {
+    connection.query(firstStatement, [id], (err, [product]) => {
       if (err) return reject(err);
-      connection.query(second_statement, [product.brief_description], (err, result) =>{
-        if (err) return reject(err);
-        resolve(result);
+      return connection.query(secondStatement, [product.brief_description], (error, result) => {
+        if (error) return reject(err);
+        return resolve(result);
       });
     });
   });
-};
-
-
-
-
+}
 
 module.exports = {
   createProduct,
   getAll,
   getById,
-  getSimilarDescription
-}
+  getSimilarDescription,
+};
