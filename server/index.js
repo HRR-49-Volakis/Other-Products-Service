@@ -17,8 +17,9 @@ app.get('/api/products/similar/id=:id', products_controller.getSimilarDescriptio
 app.get('/api/ratings', ratings_controller.getAll);
 app.get('/api/ratings/count/product_id=:id', ratings_controller.getCountByProduct);
 app.get('/api/ratings/avg/product_id=:id', ratings_controller.getAvgRatingByProduct);
-//app.use(express.startic())
 
+
+app.use(express.static( __dirname + '/../public/'));
 module.exports = {
   app
 }
