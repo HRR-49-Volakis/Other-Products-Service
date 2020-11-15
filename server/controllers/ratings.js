@@ -1,38 +1,34 @@
-const ratings_model = require(__dirname + '/../models/ratings.js');
-
+const ratingsModel = require('../models/ratings.js');
 
 function getAll(req, res) {
-  ratings_model.getAll()
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getAll ratings msg-', err.message);
+  ratingsModel.getAll()
+    .then((results) => res.send(results))
+    .catch((err) => {
       res.status(500);
-      res.end();
-    })
+      res.send(err);
+    });
 }
 
 function getCountByProduct(req, res) {
-  ratings_model.getCountByProduct(req.params.id)
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getCountByProduct ratings msg-', err.message);
+  ratingsModel.getCountByProduct(req.params.id)
+    .then((results) => res.send(results))
+    .catch((err) => {
       res.status(500);
-      res.end();
-    })
+      res.send(err);
+    });
 }
 
 function getAvgRatingByProduct(req, res) {
-  ratings_model.getAvgRatingByProduct(req.params.id)
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getAvgRatingByProduct ratings msg-', err.message);
+  ratingsModel.getAvgRatingByProduct(req.params.id)
+    .then((results) => res.send(results))
+    .catch((err) => {
       res.status(500);
-      res.end();
-    })
+      res.send(err);
+    });
 }
 
 module.exports = {
   getAll,
   getCountByProduct,
-  getAvgRatingByProduct
-}
+  getAvgRatingByProduct,
+};

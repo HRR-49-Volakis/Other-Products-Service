@@ -1,37 +1,34 @@
-const products_model = require(__dirname + '/../models/products.js');
+const productsModel = require('../models/products.js');
 
 function getAll(req, res) {
-  products_model.getAll()
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getAll products msg', err.message);
-      res.status(500)
-      res.end();
+  productsModel.getAll()
+    .then((results) => res.send(results))
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
     });
 }
 
 function getById(req, res) {
-  products_model.getById(req.params.id)
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getById products msg-', err.message);
+  productsModel.getById(req.params.id)
+    .then((results) => res.send(results))
+    .catch((err) => {
       res.status(500);
-      res.end();
-    })
+      res.send(err);
+    });
 }
 
 function getSimilarDescription(req, res) {
-  products_model.getSimilarDescription(req.params.id)
-    .then(results => res.send(results))
-    .catch(err => {
-      console.log('Failed to getSimilarDescription products msg-', err.message);
+  productsModel.getSimilarDescription(req.params.id)
+    .then((results) => res.send(results))
+    .catch((err) => {
       res.status(500);
-      res.end();
-    })
+      res.send(err);
+    });
 }
 
 module.exports = {
   getAll,
   getById,
-  getSimilarDescription
-}
+  getSimilarDescription,
+};

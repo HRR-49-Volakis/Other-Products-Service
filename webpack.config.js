@@ -1,15 +1,16 @@
 const path = require('path');
+
 const SRC = path.join(__dirname, '/client/src/');
 const PUBLIC = path.join(__dirname, '/public/');
 
 module.exports = {
 
   mode: 'development',
-  entry: `${SRC}/index.js`,
+  entry: `${SRC}index.jsx`,
   watch: true,
   output: {
     filename: 'bundle.js',
-    path: path.resolve(`${PUBLIC}`)
+    path: path.resolve(`${PUBLIC}`),
   },
   module: {
     rules: [{
@@ -18,11 +19,9 @@ module.exports = {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"]
-        }
-      }
-    }]
-  }
-
-
-}
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+        },
+      },
+    }],
+  },
+};

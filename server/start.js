@@ -1,8 +1,9 @@
-const {app} = require(__dirname + '/index.js');
-const config = require(__dirname + '/../config.js');
+/* eslint-disable no-console */
+const { app } = require('./index.js');
+const config = require('../config.js');
 
 const PORT = config.prod_port || config.dev_port;
-app.listen(PORT, (err, result)=> {
+app.listen(PORT, (err) => {
   if (err) return console.log('eror starting express msg-', err.message);
-  console.log('Express server listening on port-', PORT);
-})
+  return console.log('Express server listening on port-', PORT);
+});
