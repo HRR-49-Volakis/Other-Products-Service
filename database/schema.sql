@@ -9,7 +9,7 @@ CREATE TABLE products (
   image_one_url text,
   image_two_url text,
   page_url text,
-  price int,
+  price double,
   hearted boolean,
   brief_description text,
   collection_name varchar(255)

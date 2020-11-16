@@ -32,12 +32,14 @@ function generateFakeData(model) {
       username: faker.internet.userName(),
     };
   } else if (model === 'product') {
+    const name = faker.commerce.product();
+    const description = `${faker.commerce.productAdjective()} ${faker.commerce.productMaterial()}, ${faker.random.number(50)} cm`;
     const unfinishedData = {
-      product_name: faker.commerce.productName(),
+      product_name: name,
       page_url: faker.internet.url(),
-      price: faker.random.number(),
+      price: (faker.random.number(40) * 5),
       hearted: faker.random.boolean(),
-      brief_description: faker.commerce.productDescription(),
+      brief_description: description,
       collection_name: faker.commerce.department(),
     };
     data = addRandomImagePair(unfinishedData);
