@@ -48,7 +48,7 @@ function getById(id) {
 
 function getSimilarDescription(id) {
   const firstStatement = 'SELECT brief_description FROM products WHERE id=?;';
-  const secondStatement = 'SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?);';
+  const secondStatement = 'SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?) LIMIT 10;';
   return new Promise((resolve, reject) => {
     connection.query(firstStatement, [id], (err, [product]) => {
       if (err) return reject(err);
