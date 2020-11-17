@@ -66,15 +66,15 @@ export default class Product extends React.Component {
 
   render() {
     const {
-      id,
+      // id,
       productName,
-      imageOneUrl,
-      imageTwoUrl,
+      // imageOneUrl,
+      // imageTwoUrl,
       pageUrl,
       price,
-      hearted,
+      // hearted,
       briefDescription,
-      collectionName,
+      // collectionName,
     } = this.props;
     const {
       avgRatings,
@@ -82,20 +82,22 @@ export default class Product extends React.Component {
       shownImage,
     } = this.state;
     return (
-      <div
-        onMouseOver={this.handleMouseOver}
-        onFocus={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-        onBlur={this.handleMouseOut}
-        className="product"
-      >
-        <img src={shownImage} alt="img" />
-        <div className="product-title">{productName}</div>
-        <div className="product-description">{briefDescription}</div>
-        <div className="product-price">{`$${price}`}</div>
-        <div className="product-avg-rating">{`avg stars ${avgRatings}`}</div>
-        <div className="product-count-rating">{`times rated (${countRatings})`}</div>
-      </div>
+      <a href={pageUrl}>
+        <div
+          onMouseOver={this.handleMouseOver}
+          onFocus={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onBlur={this.handleMouseOut}
+          className="product"
+        >
+          <img src={shownImage} alt="product" />
+          <div className="product-title">{productName}</div>
+          <div className="product-description">{briefDescription}</div>
+          <span className="product-price">{`${price}`}</span>
+          <div className="product-avg-rating">{`avg stars ${avgRatings}`}</div>
+          <div className="product-count-rating">{`times rated (${countRatings})`}</div>
+        </div>
+      </a>
     );
   }
 }
