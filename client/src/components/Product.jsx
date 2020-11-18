@@ -14,6 +14,7 @@ export default class Product extends React.Component {
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.getStyledRatings = this.getStyledRatings.bind(this);
   }
 
   componentDidMount() {
@@ -64,6 +65,27 @@ export default class Product extends React.Component {
     return axios.get(`/api/ratings/count/product_id=${id}`);
   }
 
+  getStyledRatings() {
+    const { avgRatings } = this.state;
+    if (!avgRatings) return [];
+
+    const filledStar = <svg width="100%" viewBox="0 0 24 24" className="filled-star"><path d="M12.003 4L14.8623 8.9091L20.4147 10.1115L16.6294 14.3478L17.2017 20L12.003 17.7091L6.80429 20L7.37657 14.3478L3.59131 10.1115L9.14371 8.9091L12.003 4Z" /></svg>;
+    const emptyStar = <svg width="100%" viewBox="0 0 24 24" className="empty-star"><path d="M12.003 4L14.8623 8.9091L20.4147 10.1115L16.6294 14.3478L17.2017 20L12.003 17.7091L6.80429 20L7.37657 14.3478L3.59131 10.1115L9.14371 8.9091L12.003 4Z" /></svg>;
+    const halfStar = (
+      <svg width="100%" viewBox="0 0 24 24" className="filled-star">
+        <path d="M17.1986 20L11.9999 17.7091V4L14.8592 8.9091L20.4116 10.1115L16.6264 14.3478L17.1986 20Z" fill="#DFDFDF" />
+        <path d="M6.80136 20L12.0001 17.7091V4L9.14078 8.9091L3.58838 10.1115L7.37364 14.3478L6.80136 20Z" />
+      </svg>
+    );
+
+    const stars = Array(Math.floor(avgRatings)).fill(filledStar);
+    if (avgRatings % 1 > 0.25 && avgRatings % 1 < 0.75) {
+      stars.push(halfStar);
+      return stars.concat(Array(4 - Math.floor(avgRatings)).fill(emptyStar));
+    }
+    return stars.concat(Array(5 - Math.floor(avgRatings)).fill(emptyStar));
+  }
+
   render() {
     const {
       // id,
@@ -77,7 +99,6 @@ export default class Product extends React.Component {
       // collectionName,
     } = this.props;
     const {
-      avgRatings,
       countRatings,
       shownImage,
     } = this.state;
@@ -93,9 +114,13 @@ export default class Product extends React.Component {
           <img src={shownImage} alt="product" />
           <div className="product-title">{productName}</div>
           <div className="product-description">{briefDescription}</div>
-          <span className="product-price">{`${price}`}</span>
-          <div className="product-avg-rating">{`avg stars ${avgRatings}`}</div>
-          <div className="product-count-rating">{`times rated (${countRatings})`}</div>
+          <div className="product-price">{`${price}`}</div>
+          <span className="ratings-info">
+            <div className="stars" data-stars="1">
+              {this.getStyledRatings()}
+              <div className="product-count-rating">{`(${countRatings})`}</div>
+            </div>
+          </span>
         </div>
       </a>
     );
