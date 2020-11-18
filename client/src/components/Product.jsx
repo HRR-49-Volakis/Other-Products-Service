@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styles from '../style.css';
 
 export default class Product extends React.Component {
   constructor(props) {
@@ -102,6 +103,7 @@ export default class Product extends React.Component {
       countRatings,
       shownImage,
     } = this.state;
+
     return (
       <a href={pageUrl}>
         <div
@@ -112,7 +114,7 @@ export default class Product extends React.Component {
           className="product"
         >
           <img src={shownImage} alt="product" />
-          <div className="product-title">{productName}</div>
+          <div className={styles.producttitle}>{productName}</div>
           <div className="product-description">{briefDescription}</div>
           <div className="product-price">{`${price}`}</div>
           <span className="ratings-info">

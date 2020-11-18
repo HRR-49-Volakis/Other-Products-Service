@@ -33,14 +33,11 @@ class App extends React.Component {
     const { Product, ProductList } = this.props;
     const { mainProductId, relatedProducts } = this.state;
     return (
-      <div>
-        <h1>Product List</h1>
-        <ProductList
-          Product={Product}
-          mainProductId={mainProductId}
-          relatedProducts={relatedProducts}
-        />
-      </div>
+      <ProductList
+        Product={Product}
+        mainProductId={mainProductId}
+        relatedProducts={relatedProducts}
+      />
     );
   }
 }
