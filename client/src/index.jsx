@@ -2,12 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App.jsx';
+import App from './App.jsx';
 import ProductList from './components/ProductList.jsx';
 import Product from './components/Product.jsx';
 
 const mainProduct = '44';
-
 ReactDOM.render(
   <App
     ProductList={ProductList}

@@ -1,4 +1,4 @@
-.productsList {
+/* .productsList {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   font-size: 12px;
@@ -8,12 +8,13 @@
 }
 /* product wrapped in anchor tag for clickable link,
  remove anchor styling so everythign isnt blue and underlined */
-a, a:hover, a:focus, a:active {
+/*
+ a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
 }
 
-.product {
+.product-wrapper {
   width: 175px;
   padding: 5px;
   display:inline-block;
@@ -55,7 +56,6 @@ a, a:hover, a:focus, a:active {
   font-weight: 700;
   color: #000;
   font-size: 22px;
-
 }
 
 .product-price:before{
@@ -90,13 +90,4 @@ a, a:hover, a:focus, a:active {
   text-decoration: underline;
 }
 
-/* .product-price > .currency-symbol {
-  display: inline-block;
-  font-size:11px;
-  vertical-align:text-top;
 
-} */
-
-.star-svg-creator {
-  display:none;
-}

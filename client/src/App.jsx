@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
+import GlobalStyle from './styles/globalStyles';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,11 +34,14 @@ class App extends React.Component {
     const { Product, ProductList } = this.props;
     const { mainProductId, relatedProducts } = this.state;
     return (
-      <ProductList
-        Product={Product}
-        mainProductId={mainProductId}
-        relatedProducts={relatedProducts}
-      />
+      <div>
+        <GlobalStyle />
+        <ProductList
+          Product={Product}
+          mainProductId={mainProductId}
+          relatedProducts={relatedProducts}
+        />
+      </div>
     );
   }
 }
