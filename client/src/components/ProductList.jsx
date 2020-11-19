@@ -1,4 +1,5 @@
 import React from 'react';
+import { ListWrapper } from '../styles/productStyles';
 
 export default class ProductList extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ export default class ProductList extends React.Component {
   render() {
     const { Product, relatedProducts } = this.props;
     return (
-      <div className="productsList">
+      // <div className={productList}>
+      <ListWrapper>
         {relatedProducts.map((p) => (
           <Product
             key={p.id}
@@ -26,7 +28,8 @@ export default class ProductList extends React.Component {
             collectionName={p.collection_name}
           />
         ))}
-      </div>
+      </ListWrapper>
+      // </div>
     );
   }
 }

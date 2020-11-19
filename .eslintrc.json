@@ -3,7 +3,8 @@
   "plugins": [
     "react",
     "jsx-a11y",
-    "import"
+    "import",
+    "better-styled-components"
   ],
   "rules": {
     "no-await-in-loop": "off",
