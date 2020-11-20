@@ -1,20 +1,62 @@
 import styled from 'styled-components';
 
+export const ArrowListWrapper = styled.div`
+  margin-left:20%;
+  width:800px;
+  height:400px;
+  display: grid;
+  grid-template-columns: 10px 720px 10px;
+`;
+
 export const ListWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   font-size: 12px;
-  height: 350px;
-  width: 800px;
+  height: 100%;
+  width: 740px;
   overflow-x: scroll;
-  scroll-snap-type: x mandatory;
+  transform: translateX: (+1);
   scroll-behavior: smooth;
   padding:4px 0 24px;
+`;
+
+export const ArrowRight = styled.path.attrs({
+  d: 'M16.4153 12.0003L8.41407 20.0011L6.9999 18.5868L13.5869 12.0002L7.00097 5.41339L8.41528 3.99927L16.4153 12.0003Z',
+})`
+  z-index: 8;
+  fill: white;
+  opacity: ${(props) => (props.hovering ? '1' : '0.0')}
+`;
+
+export const ArrowLeft = styled.path.attrs({
+  d: 'M7 12.0006L15.0012 3.99992L16.4154 5.41417L9.82838 12.0008L16.4143 18.5876L15 20.0017L7 12.0006Z',
+})`
+  z-index: 8;
+  fill: white;
+  opacity: ${(props) => (props.hovering ? '1' : '0.0')}
+`;
+
+export const ArrowWrapper = styled.svg.attrs({
+  viewBox: '0 0 24 24',
+})`
+
+  position: relative;
+  margin-top: 175px;
+  z-index: 8;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  background-color: ${(props) => (props.hovering ? 'black' : 'rgba(0, 0, 0, 0.0)')};
+  &:hover {
+    opacity: 0.5
+  }
 `;
 
 //  product wrapped in anchor tag for clickable link,
 // remove anchor styling so everythign isnt blue and underlined
 export const ProductAnchorWrapper = styled.a`
+
   text-decoration: none;
   color: inherit;
   &:hover{
@@ -32,10 +74,10 @@ export const ProductAnchorWrapper = styled.a`
 `;
 
 export const ProductWrapper = styled.div`
-
   width: 175px;
   padding: 5px;
   display:inline-block;
+  position: relative;
   cursor: pointer;
 `;
 
@@ -140,7 +182,7 @@ export const BasketIcon = styled.path.attrs({
 fill: rgb(255,255,255);
 `;
 
-export const BasketWrapper = styled.path`
+export const BasketWrapper = styled.div`
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -150,13 +192,13 @@ export const BasketWrapper = styled.path`
   margin: auto;
 
 `;
-export const BasketOuterWrapper = styled.path`
+export const BasketOuterWrapper = styled.div`
   display:inline;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   height: 40px;
+  background-color: ${(props) => (props.hovering ? 'rgb(0,88,163)' : 'rgb(255,255,255)')};
   width: 40px;
   float: right;
-  background-color: ${(props) => (props.hovering ? 'rgb(0,88,163)' : 'rgb(255,255,255)')}
 `;
