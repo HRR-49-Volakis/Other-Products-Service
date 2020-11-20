@@ -1,14 +1,15 @@
 const faker = require('faker');
 const { exec } = require('child_process');
 const { connection } = require('./db.js');
-const config = require('../config');
+
 const productsModel = require('../server/models/products.js');
 const ratingsModel = require('../server/models/ratings.js');
 const usersModel = require('../server/models/users.js');
 const imagePool = require('./imagePool.js');
 
-const user = config.prod_username || config.dev_username;
-const pass = config.prod_password || config.dev_password;
+const user = 'root';
+const pass = 'cheeze';
+
 
 function addRandomImagePair(data) {
   const keys = Object.keys(imagePool);
