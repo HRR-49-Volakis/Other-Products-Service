@@ -1,5 +1,7 @@
 const mysql = require('mysql');
-const config = require('../config.js');
+if (!process.env.DEPLOYED) {
+  const config = require('../config.js');
+}
 
 const connection = mysql.createConnection({
   host: config.prod_uri || config.dev_host,
