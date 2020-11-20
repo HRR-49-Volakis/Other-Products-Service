@@ -1,7 +1,10 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import GlobalStyle from './styles/globalStyles';
+import ProductList from './components/ProductList.jsx';
+import Product from './components/Product.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +34,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { Product, ProductList } = this.props;
     const { mainProductId, relatedProducts } = this.state;
     return (
       <div>
