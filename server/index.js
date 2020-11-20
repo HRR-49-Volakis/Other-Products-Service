@@ -10,6 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+//app.get('/:product_id'); // inialize page with a specific
 app.get('/api/products', productsController.getAll);
 app.get('/api/products/id=:id', productsController.getById);
 app.get('/api/products/similar/id=:id', productsController.getSimilarDescription);

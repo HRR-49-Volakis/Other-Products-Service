@@ -4,8 +4,7 @@ const SRC = path.join(__dirname, '/client/src/');
 const PUBLIC = path.join(__dirname, '/public/');
 
 module.exports = {
-  devtool: 'inline-source-map',
-  mode: 'development',
+  // mode: 'development',
   entry: `${SRC}index.jsx`,
   watch: true,
   output: {
@@ -15,7 +14,7 @@ module.exports = {
   module: {
     rules: [{
       test: /.jsx?$/,
-      // exclude: /node_modules/,
+      exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
         options: {

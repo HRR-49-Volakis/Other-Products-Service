@@ -14,6 +14,16 @@ class App extends React.Component {
       mainProductId,
       relatedProducts: [],
     };
+
+    this.setMainProductId = this.setMainProductId.bind(this);
+  }
+
+  setMainProductId(id) {
+    console.log('send id=', id);
+    this.setState({
+      mainProductId: id,
+    });
+    this.getRelatedProducts();
   }
 
   componentDidMount() {
@@ -42,6 +52,7 @@ class App extends React.Component {
           Product={Product}
           mainProductId={mainProductId}
           relatedProducts={relatedProducts}
+          setMainProductId={this.setMainProductId}
         />
       </div>
     );

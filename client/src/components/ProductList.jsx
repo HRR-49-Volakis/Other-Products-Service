@@ -48,7 +48,7 @@ export default class ProductList extends React.Component {
     const {
       hovering,
     } = this.state;
-    const { Product, relatedProducts } = this.props;
+    const { Product, relatedProducts, setMainProductId} = this.props;
     return (
       <ArrowListWrapper
         onMouseOver={this.handleMouseOver}
@@ -72,6 +72,7 @@ export default class ProductList extends React.Component {
               hearted={p.hearted}
               briefDescription={p.brief_description}
               collectionName={p.collection_name}
+              setMainProductId={setMainProductId}
             />
           ))}
         </ListWrapper>

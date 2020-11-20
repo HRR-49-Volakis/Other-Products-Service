@@ -117,12 +117,18 @@ export default class Product extends React.Component {
     return stars.concat(Array(5 - Math.floor(avgRatings)).fill(emptyStar));
   }
 
+  handleChangeId(id) {
+    this.props.setMainProductId(id);
+  }
+
   render() {
     const {
+      id,
       productName,
       pageUrl,
       price,
       briefDescription,
+      setMainProductId,
     } = this.props;
     const {
       countRatings,
@@ -143,16 +149,18 @@ export default class Product extends React.Component {
               <HeartIcon hovering={hovering} />
             </svg>
           </HeartWrapper>
-          <ProductAnchorWrapper href={pageUrl}>
+          <div className="setIdWrapper" onClick={this.handleChangeId.bind(this, id)} >
+          {/* <ProductAnchorWrapper onClick={setMainProductId(id)}> */}
             <ProductImage src={shownImage} alt="ikea product" />
             <ProductTitle hovering={hovering}>{productName}</ProductTitle>
             <ProductDescription>{briefDescription}</ProductDescription>
             <ProductPrice>{`${price}`}</ProductPrice>
+          </div>
             <Stars>
               {this.getStyledRatings()}
               <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
             </Stars>
-          </ProductAnchorWrapper>
+          {/* </ProductAnchorWrapper> */}
           <BasketOuterWrapper hovering={hovering}>
             <BasketWrapper>
               <svg focusable="false" width="100%" height="100%" viewBox="0 0 24 24">
