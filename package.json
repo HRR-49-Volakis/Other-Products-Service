@@ -36,9 +36,9 @@
   },
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch",
-    "start": "server/start.js -w",
-    "build": "webpack --config webpack.config.js --watch",
+    "test:watch": "jest",
+    "start": "server/start.js",
+    "build": "webpack --config webpack.config.js",
     "seed": "node ./database/seed.js",
     "lint": "./node_modules/.bin/eslint"
   },
