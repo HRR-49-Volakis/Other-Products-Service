@@ -18,6 +18,21 @@ export const ListWrapper = styled.div`
   transform: translateX: (+1);
   scroll-behavior: smooth;
   padding:4px 0 24px;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+    background-color: rgb(223,223,223,0.5);
+    opacity: 0.5;
+    &::hover {
+      background-color:red;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 5px;
+    width: 5px;
+    background: black;
+  }
 `;
 
 export const ArrowRight = styled.path.attrs({

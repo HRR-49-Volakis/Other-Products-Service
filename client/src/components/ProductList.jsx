@@ -13,7 +13,6 @@ export default class ProductList extends React.Component {
     this.state = {
       hovering: false,
     };
-
     this.listref = React.createRef();
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -48,7 +47,7 @@ export default class ProductList extends React.Component {
     const {
       hovering,
     } = this.state;
-    const { Product, relatedProducts, setMainProductId} = this.props;
+    const { Product, relatedProducts, setMainProductId } = this.props;
     return (
       <ArrowListWrapper
         onMouseOver={this.handleMouseOver}

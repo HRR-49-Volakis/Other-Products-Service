@@ -32,7 +32,7 @@ class App extends React.Component {
 
   getRelatedProducts() {
     const { mainProductId } = this.state;
-    axios.get(`/api/products/similar/id=${mainProductId}`)
+    axios.get(`/api/product_scroller/products/similar/id=${mainProductId}`)
       .then((res) => {
         this.setState({
           relatedProducts: res.data,

@@ -10,14 +10,13 @@ const app = express();
 
 app.use(bodyParser.json());
 
-//app.get('/:product_id'); // inialize page with a specific
-app.get('/api/products', productsController.getAll);
-app.get('/api/products/id=:id', productsController.getById);
-app.get('/api/products/similar/id=:id', productsController.getSimilarDescription);
+app.get('/api/product_scroller/products', productsController.getAll);
+app.get('/api/product_scroller/products/id=:id', productsController.getById);
+app.get('/api/product_scroller/products/similar/id=:id', productsController.getSimilarDescription);
 
-app.get('/api/ratings', ratingsController.getAll);
-app.get('/api/ratings/count/product_id=:id', ratingsController.getCountByProduct);
-app.get('/api/ratings/avg/product_id=:id', ratingsController.getAvgRatingByProduct);
+app.get('/api/product_scroller/ratings', ratingsController.getAll);
+app.get('/api/product_scroller/ratings/count/product_id=:id', ratingsController.getCountByProduct);
+app.get('/api/product_scroller/ratings/avg/product_id=:id', ratingsController.getAvgRatingByProduct);
 
 app.use(express.static(publicFolder));
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  ProductAnchorWrapper,
   ProductWrapper,
   ProductImage,
   ProductTitle,
@@ -95,14 +94,9 @@ export default class Product extends React.Component {
     });
   }
 
-  getRatingAvg() {
-    const { id } = this.props;
-    return axios.get(`/api/ratings/avg/product_id=${id}`);
-  }
-
-  getRatingCount() {
-    const { id } = this.props;
-    return axios.get(`/api/ratings/count/product_id=${id}`);
+  handleChangeId(id) {
+    const { setMainProductId } = this.props;
+    setMainProductId(id);
   }
 
   getStyledRatings() {
@@ -117,18 +111,22 @@ export default class Product extends React.Component {
     return stars.concat(Array(5 - Math.floor(avgRatings)).fill(emptyStar));
   }
 
-  handleChangeId(id) {
-    this.props.setMainProductId(id);
+  getRatingCount() {
+    const { id } = this.props;
+    return axios.get(`/api/product_scroller/ratings/count/product_id=${id}`);
+  }
+
+  getRatingAvg() {
+    const { id } = this.props;
+    return axios.get(`/api/product_scroller/ratings/avg/product_id=${id}`);
   }
 
   render() {
     const {
       id,
       productName,
-      pageUrl,
       price,
       briefDescription,
-      setMainProductId,
     } = this.props;
     const {
       countRatings,
@@ -150,17 +148,15 @@ export default class Product extends React.Component {
             </svg>
           </HeartWrapper>
           <div className="setIdWrapper" onClick={this.handleChangeId.bind(this, id)} >
-          {/* <ProductAnchorWrapper onClick={setMainProductId(id)}> */}
             <ProductImage src={shownImage} alt="ikea product" />
             <ProductTitle hovering={hovering}>{productName}</ProductTitle>
             <ProductDescription>{briefDescription}</ProductDescription>
             <ProductPrice>{`${price}`}</ProductPrice>
           </div>
-            <Stars>
-              {this.getStyledRatings()}
-              <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
-            </Stars>
-          {/* </ProductAnchorWrapper> */}
+          <Stars>
+            {this.getStyledRatings()}
+            <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
+          </Stars>
           <BasketOuterWrapper hovering={hovering}>
             <BasketWrapper>
               <svg focusable="false" width="100%" height="100%" viewBox="0 0 24 24">
