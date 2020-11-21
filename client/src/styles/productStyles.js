@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const ArrowListWrapper = styled.div`
-  margin-left:20%;
-  width:800px;
+  width:804px;
   height:400px;
   display: grid;
-  grid-template-columns: 10px 720px 10px;
+  grid-template-columns: 30px 744px 30px;
 `;
 
 export const ListWrapper = styled.div`
@@ -13,11 +12,11 @@ export const ListWrapper = styled.div`
   grid-template-columns: repeat(12, 1fr);
   font-size: 12px;
   height: 100%;
-  width: 740px;
+  width: 744px;
   overflow-x: scroll;
   transform: translateX: (+1);
   scroll-behavior: smooth;
-  padding:4px 0 24px;
+  padding:4px 0 15px;
 
   &::-webkit-scrollbar {
     height: 3px;
@@ -38,7 +37,7 @@ export const ListWrapper = styled.div`
 export const ArrowRight = styled.path.attrs({
   d: 'M16.4153 12.0003L8.41407 20.0011L6.9999 18.5868L13.5869 12.0002L7.00097 5.41339L8.41528 3.99927L16.4153 12.0003Z',
 })`
-  z-index: 8;
+  z-index: 3;
   fill: white;
   opacity: ${(props) => (props.hovering ? '1' : '0.0')}
 `;
@@ -46,7 +45,7 @@ export const ArrowRight = styled.path.attrs({
 export const ArrowLeft = styled.path.attrs({
   d: 'M7 12.0006L15.0012 3.99992L16.4154 5.41417L9.82838 12.0008L16.4143 18.5876L15 20.0017L7 12.0006Z',
 })`
-  z-index: 8;
+  z-index: 3;
   fill: white;
   opacity: ${(props) => (props.hovering ? '1' : '0.0')}
 `;
