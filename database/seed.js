@@ -10,7 +10,6 @@ const imagePool = require('./imagePool.js');
 const user = 'root';
 const pass = 'cheeze';
 
-
 function addRandomImagePair(data) {
   const keys = Object.keys(imagePool);
   const urls = imagePool[keys[Math.floor(Math.random() * keys.length)]];

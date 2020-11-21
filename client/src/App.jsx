@@ -18,15 +18,15 @@ class App extends React.Component {
     this.setMainProductId = this.setMainProductId.bind(this);
   }
 
+  componentDidMount() {
+    this.getRelatedProducts();
+  }
+
   setMainProductId(id) {
     console.log('send id=', id);
     this.setState({
       mainProductId: id,
     });
-    this.getRelatedProducts();
-  }
-
-  componentDidMount() {
     this.getRelatedProducts();
   }
 

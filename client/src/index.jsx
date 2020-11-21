@@ -10,5 +10,5 @@ ReactDOM.render(
   <App
     mainProductId={mainProduct}
   />,
-  document.getElementById('app'),
+  document.getElementById('service1'),
 );

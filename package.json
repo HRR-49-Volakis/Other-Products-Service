@@ -12,7 +12,8 @@
     "react-dom": "^17.0.1",
     "save-dev": "0.0.1-security",
     "styled-components": "^5.2.1",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "faker": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
