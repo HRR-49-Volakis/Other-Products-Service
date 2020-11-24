@@ -1,9 +1,11 @@
 import React from 'react';
 import {
-  ListWrapper,
+  OuterListWrapper,
+  InnerListWrapper,
   ArrowWrapper,
   ArrowRight,
   ArrowLeft,
+  ListTitle,
   ArrowListWrapper,
 } from '../styles/productStyles';
 
@@ -47,38 +49,46 @@ export default class ProductList extends React.Component {
     const {
       hovering,
     } = this.state;
-    const { Product, relatedProducts, setMainProductId } = this.props;
+    const {
+      Product,
+      relatedProducts,
+      setMainProductId,
+      listTitle,
+    } = this.props;
     return (
-      <ArrowListWrapper
-        onMouseOver={this.handleMouseOver}
-        onFocus={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-        onBlur={this.handleMouseOut}
-      >
-        <ArrowWrapper onClick={this.scrollleft} hovering={hovering}>
-          <ArrowLeft hovering={hovering} />
-        </ArrowWrapper>
-        <ListWrapper ref={this.listref}>
-          {relatedProducts.map((p) => (
-            <Product
-              key={p.id}
-              id={p.id}
-              productName={p.product_name}
-              imageOneUrl={p.image_one_url}
-              imageTwoUrl={p.image_two_url}
-              pageUrl={p.page_url}
-              price={p.price}
-              hearted={p.hearted}
-              briefDescription={p.brief_description}
-              collectionName={p.collection_name}
-              setMainProductId={setMainProductId}
-            />
-          ))}
-        </ListWrapper>
-        <ArrowWrapper onClick={this.scrollright} hovering={hovering}>
-          <ArrowRight hovering={hovering} />
-        </ArrowWrapper>
-      </ArrowListWrapper>
+      <OuterListWrapper>
+        <ListTitle>{listTitle}</ListTitle>
+        <ArrowListWrapper
+          onMouseOver={this.handleMouseOver}
+          onFocus={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onBlur={this.handleMouseOut}
+        >
+          <ArrowWrapper onClick={this.scrollleft} hovering={hovering}>
+            <ArrowLeft hovering={hovering} />
+          </ArrowWrapper>
+          <InnerListWrapper ref={this.listref}>
+            {relatedProducts.map((p) => (
+              <Product
+                key={p.id}
+                id={p.id}
+                productName={p.product_name}
+                imageOneUrl={p.image_one_url}
+                imageTwoUrl={p.image_two_url}
+                pageUrl={p.page_url}
+                price={p.price}
+                hearted={p.hearted}
+                briefDescription={p.brief_description}
+                collectionName={p.collection_name}
+                setMainProductId={setMainProductId}
+              />
+            ))}
+          </InnerListWrapper>
+          <ArrowWrapper onClick={this.scrollright} hovering={hovering}>
+            <ArrowRight hovering={hovering} />
+          </ArrowWrapper>
+        </ArrowListWrapper>
+      </OuterListWrapper>
     );
   }
 }

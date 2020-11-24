@@ -5,6 +5,7 @@ import axios from 'axios';
 import GlobalStyle from './styles/globalStyles';
 import ProductList from './components/ProductList.jsx';
 import Product from './components/Product.jsx';
+import { AppWrapper } from './styles/productStyles';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,14 +13,16 @@ class App extends React.Component {
     const { mainProductId } = props;
     this.state = {
       mainProductId,
-      relatedProducts: [],
+      relatedDescriptions: [],
+      relatedCollection: [],
     };
 
     this.setMainProductId = this.setMainProductId.bind(this);
   }
 
   componentDidMount() {
-    this.getRelatedProducts();
+    this.getRelatedDescription();
+    this.getRelatedCollection();
   }
 
   setMainProductId(id) {
@@ -27,15 +30,29 @@ class App extends React.Component {
     this.setState({
       mainProductId: id,
     });
-    this.getRelatedProducts();
+    this.getRelatedDescription();
+    this.getRelatedCollection();
   }
 
-  getRelatedProducts() {
+  getRelatedCollection() {
+    const { mainProductId } = this.state;
+    axios.get(`/api/product_scroller/products/collection/id=${mainProductId}`)
+      .then((res) => {
+        this.setState({
+          relatedCollection: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  getRelatedDescription() {
     const { mainProductId } = this.state;
     axios.get(`/api/product_scroller/products/similar/id=${mainProductId}`)
       .then((res) => {
         this.setState({
-          relatedProducts: res.data,
+          relatedDescriptions: res.data,
         });
       })
       .catch((err) => {
@@ -44,17 +61,27 @@ class App extends React.Component {
   }
 
   render() {
-    const { mainProductId, relatedProducts } = this.state;
+    const { mainProductId, relatedDescriptions, relatedCollection } = this.state;
+
     return (
-      <div>
+      <AppWrapper>
         <GlobalStyle />
         <ProductList
           Product={Product}
+          listTitle="Similar products"
           mainProductId={mainProductId}
-          relatedProducts={relatedProducts}
+          relatedProducts={relatedDescriptions}
+          setMainProductId={this.setMainProductId}
+          style
+        />
+        <ProductList
+          Product={Product}
+          listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
+          mainProductId={mainProductId}
+          relatedProducts={relatedCollection}
           setMainProductId={this.setMainProductId}
         />
-      </div>
+      </AppWrapper>
     );
   }
 }

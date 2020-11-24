@@ -60,9 +60,24 @@ function getSimilarDescription(id) {
   });
 }
 
+function getSimilarCollection(id) {
+  const firstStatement = 'SELECT collection_name FROM products WHERE id=?;';
+  const secondStatement = 'SELECT * FROM products WHERE collection_name=? LIMIT 12;';
+  return new Promise((resolve, reject) => {
+    connection.query(firstStatement, [id], (err, [product]) => {
+      if (err) return reject(err);
+      return connection.query(secondStatement, [product.collection_name], (error, result) => {
+        if (error) return reject(err);
+        return resolve(result);
+      });
+    });
+  });
+}
+
 module.exports = {
   createProduct,
   getAll,
   getById,
   getSimilarDescription,
+  getSimilarCollection,
 };

@@ -16,6 +16,9 @@ import {
   StarIcon,
   HalfEmptyStarIcon,
   HalfFilledStarIcon,
+  ImageOne,
+  ImageTwo,
+  HeartIconOutLine,
 } from '../styles/productStyles';
 
 const filledStar = (
@@ -40,18 +43,15 @@ const halfStar = (
 export default class Product extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      imageOneUrl,
-    } = props;
-
     this.state = {
       hovering: false,
-      shownImage: imageOneUrl,
+      liked: false,
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.getStyledRatings = this.getStyledRatings.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
   }
 
   componentDidMount() {
@@ -75,28 +75,27 @@ export default class Product extends React.Component {
   }
 
   handleMouseOver() {
-    const {
-      imageTwoUrl,
-    } = this.props;
     this.setState({
       hovering: true,
-      shownImage: imageTwoUrl,
     });
   }
 
   handleMouseOut() {
-    const {
-      imageOneUrl,
-    } = this.props;
     this.setState({
       hovering: false,
-      shownImage: imageOneUrl,
     });
   }
 
   handleChangeId(id) {
     const { setMainProductId } = this.props;
     setMainProductId(id);
+  }
+
+  handleHeartClick() {
+    const { liked } = this.state;
+    this.setState({
+      liked: !liked,
+    });
   }
 
   getStyledRatings() {
@@ -127,11 +126,13 @@ export default class Product extends React.Component {
       productName,
       price,
       briefDescription,
+      imageTwoUrl,
+      imageOneUrl,
     } = this.props;
     const {
       countRatings,
-      shownImage,
       hovering,
+      liked,
     } = this.state;
 
     return (
@@ -142,13 +143,17 @@ export default class Product extends React.Component {
           onMouseOut={this.handleMouseOut}
           onBlur={this.handleMouseOut}
         >
-          <HeartWrapper>
+          <HeartWrapper onClick={this.handleHeartClick}>
             <svg focusable="false" width="100%" viewBox="0 0 24 24">
-              <HeartIcon hovering={hovering} />
+              <HeartIconOutLine hovering={hovering} liked={liked} />
+              <HeartIcon hovering={hovering} liked={liked} />
             </svg>
           </HeartWrapper>
-          <div className="setIdWrapper" onClick={this.handleChangeId.bind(this, id)} >
-            <ProductImage src={shownImage} alt="ikea product" />
+          <div className="setIdWrapper" onClick={this.handleChangeId.bind(this, id)} aria-hidden>
+            <ProductImage>
+              <ImageOne hovering={hovering} src={imageOneUrl} alt="ikea product" />
+              <ImageTwo hovering={hovering} src={imageTwoUrl} alt="ikea product" />
+            </ProductImage>
             <ProductTitle hovering={hovering}>{productName}</ProductTitle>
             <ProductDescription>{briefDescription}</ProductDescription>
             <ProductPrice>{`${price}`}</ProductPrice>

@@ -27,8 +27,18 @@ function getSimilarDescription(req, res) {
     });
 }
 
+function getSimilarCollection(req, res) {
+  productsModel.getSimilarCollection(req.params.id)
+    .then((results) => res.send(results))
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
+    });
+}
+
 module.exports = {
   getAll,
   getById,
   getSimilarDescription,
+  getSimilarCollection,
 };

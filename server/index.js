@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.get('/api/product_scroller/products', productsController.getAll);
 app.get('/api/product_scroller/products/id=:id', productsController.getById);
 app.get('/api/product_scroller/products/similar/id=:id', productsController.getSimilarDescription);
+app.get('/api/product_scroller/products/collection/id=:id', productsController.getSimilarCollection);
 
 app.get('/api/product_scroller/ratings', ratingsController.getAll);
 app.get('/api/product_scroller/ratings/count/product_id=:id', ratingsController.getCountByProduct);
