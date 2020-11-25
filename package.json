@@ -41,7 +41,7 @@
     "start": "node server/start.js",
     "start:dev": "nodemon server/start.js",
     "build:dev": "webpack --config webpack.config.js -w",
-    "build:": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "seed": "node ./database/seed.js",
     "lint": "./node_modules/.bin/eslint"
   },

@@ -1,100 +1,5 @@
 import styled from 'styled-components';
 
-export const AppWrapper = styled.div`
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: px;
-`;
-
-export const OuterListWrapper = styled.div`
-  display: block;
-  /* margin-top: 75px; */
-  margin-bottom: 150px;
-`;
-
-export const ListTitle = styled.div`
-  display: block;
-  /* padding-top: 20px; */
-  /* padding-bottom: 10px; */
-  width: 800px;
-  font-size: 1.375rem;
-  line-height: 1.4545454545;
-  color:#111;
-  font-weight: 700;
-  padding-left: 35px;
-  font-faimly: sans-serif;
-
-`;
-
-export const ArrowListWrapper = styled.div`
-  width:804px;
-  height:400px;
-  display: grid;
-  grid-template-columns: 30px 744px 30px;
-`;
-
-export const InnerListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  font-size: 12px;
-  height: 500px;
-  width: 744px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  overflow-x: scroll;
-  transform: translateX: (+1);
-  scroll-behavior: smooth;
-  /* padding:4px 0 15px; */
-
-  &::-webkit-scrollbar {
-    height: 3px;
-    background-color: rgb(223,223,223,0.5);
-    opacity: 0.5;
-    &::hover {
-      background-color:red;
-    }
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 5px;
-    width: 5px;
-    background: black;
-  }
-`;
-
-export const ArrowRight = styled.path.attrs({
-  d: 'M16.4153 12.0003L8.41407 20.0011L6.9999 18.5868L13.5869 12.0002L7.00097 5.41339L8.41528 3.99927L16.4153 12.0003Z',
-})`
-  z-index: 3;
-  fill: white;
-  opacity: ${(props) => (props.hovering ? '1' : '0.0')};
-`;
-
-export const ArrowLeft = styled.path.attrs({
-  d: 'M7 12.0006L15.0012 3.99992L16.4154 5.41417L9.82838 12.0008L16.4143 18.5876L15 20.0017L7 12.0006Z',
-})`
-  z-index: 3;
-  fill: white;
-  opacity: ${(props) => (props.hovering ? '1' : '0.0')};
-`;
-
-export const ArrowWrapper = styled.svg.attrs({
-  viewBox: '0 0 24 24',
-})`
-
-  position: relative;
-  margin-top: 175px;
-  z-index: 8;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 30px;
-  width: 30px;
-  background-color: ${(props) => (props.hovering ? 'black' : 'rgba(0, 0, 0, 0.0)')};
-  &:hover {
-    opacity: 0.5
-  }
-`;
-
 //  product wrapped in anchor tag for clickable link,
 // remove anchor styling so everythign isnt blue and underlined
 export const ProductAnchorWrapper = styled.a`
@@ -125,7 +30,6 @@ export const ProductWrapper = styled.div`
   position: relative;
 `;
 
-// <ProductImage imageOneUrl={imageOneUrl} imageTwoUrl={imageTwoUrl} alt="ikea product" />
 export const ProductImage = styled.div`
   position: relative;
   width:175px;
@@ -282,33 +186,4 @@ export const HeartIcon = styled.path.attrs({
     stroke: ${(props) => (props.hovering ? 'rgb(59, 59, 59)' : 'rgb(255,255,255)')};
     fill: rgb(59, 59, 59)
   }
-`;
-
-export const BasketIcon = styled.path.attrs({
-  d: 'M10.4372 4H10.9993H12.0003H12.9996H13.5616L13.8538 4.48014L17.2112 9.99713H21H22.2806L21.9702 11.2396L21.5303 13H19.4688L19.7194 11.9971H4.28079L5.59143 17.2397C5.70272 17.6848 6.1027 17.9971 6.56157 17.9971H15V19.9971H6.56157C5.18496 19.9971 3.98502 19.0602 3.65114 17.7247L2.02987 11.2397L1.71924 9.99713H3.00002H6.78793L10.145 4.48017L10.4372 4ZM12.4375 6L14.87 9.99713H9.12911L11.5614 6H12.0003H12.4375ZM17.9961 16V14H19.9961V16H21.9961V18H19.9961V20H17.9961V18H15.9961V16H17.9961Z',
-  'fill-rule': 'nonzero',
-})`
-  position: absolute;
-  fill: rgb(255,255,255);
-`;
-
-export const BasketWrapper = styled.div`
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  height: 30px;
-  width: 30px;
-  position: relative;
-  margin: auto;
-  cursor: pointer;
-`;
-export const BasketOuterWrapper = styled.div`
-  display:inline;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  height: 40px;
-  background-color: ${(props) => (props.hovering ? 'rgb(0,88,163)' : 'rgb(255,255,255)')};
-  width: 40px;
-  margin-left: 75%;
 `;

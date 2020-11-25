@@ -9,9 +9,6 @@ import {
   Stars,
   ProductRatingCount,
   HeartWrapper,
-  BasketIcon,
-  BasketWrapper,
-  BasketOuterWrapper,
   HeartIcon,
   StarIcon,
   HalfEmptyStarIcon,
@@ -19,7 +16,7 @@ import {
   ImageOne,
   ImageTwo,
   HeartIconOutLine,
-} from '../styles/productStyles';
+} from './productStyles';
 
 const filledStar = (
   <svg width="100%" viewBox="0 0 24 24">
@@ -46,12 +43,14 @@ export default class Product extends React.Component {
     this.state = {
       hovering: false,
       liked: false,
+      addedToBasket: false,
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.getStyledRatings = this.getStyledRatings.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
+    this.toggleBasket = this.toggleBasket.bind(this);
   }
 
   componentDidMount() {
@@ -120,6 +119,13 @@ export default class Product extends React.Component {
     return axios.get(`/api/product_scroller/ratings/avg/product_id=${id}`);
   }
 
+  toggleBasket() {
+    const { addedToBasket } = this.state;
+    this.setState({
+      addedToBasket: !addedToBasket,
+    });
+  }
+
   render() {
     const {
       id,
@@ -128,6 +134,7 @@ export default class Product extends React.Component {
       briefDescription,
       imageTwoUrl,
       imageOneUrl,
+      AddBasket,
     } = this.props;
     const {
       countRatings,
@@ -162,13 +169,9 @@ export default class Product extends React.Component {
             {this.getStyledRatings()}
             <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
           </Stars>
-          <BasketOuterWrapper hovering={hovering}>
-            <BasketWrapper>
-              <svg focusable="false" width="100%" height="100%" viewBox="0 0 24 24">
-                <BasketIcon />
-              </svg>
-            </BasketWrapper>
-          </BasketOuterWrapper>
+          <div>
+            <AddBasket hovering={hovering} />
+          </div>
         </ProductWrapper>
       </div>
     );

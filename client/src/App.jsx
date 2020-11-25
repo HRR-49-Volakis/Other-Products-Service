@@ -2,10 +2,10 @@
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
-import GlobalStyle from './styles/globalStyles';
-import ProductList from './components/ProductList.jsx';
-import Product from './components/Product.jsx';
-import { AppWrapper } from './styles/productStyles';
+import GlobalStyle, { AppWrapper } from './globalStyles';
+import ProductList from './components/ProductList/ProductList.jsx';
+import Product from './components/Product/Product.jsx';
+import AddBasket from './components/AddBasket/AddBasket.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -68,6 +68,7 @@ class App extends React.Component {
         <GlobalStyle />
         <ProductList
           Product={Product}
+          AddBasket={AddBasket}
           listTitle="Similar products"
           mainProductId={mainProductId}
           relatedProducts={relatedDescriptions}
@@ -76,6 +77,7 @@ class App extends React.Component {
         />
         <ProductList
           Product={Product}
+          AddBasket={AddBasket}
           listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
           mainProductId={mainProductId}
           relatedProducts={relatedCollection}

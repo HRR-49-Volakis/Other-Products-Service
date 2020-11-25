@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   ListTitle,
   ArrowListWrapper,
-} from '../styles/productStyles';
+} from './productListStyles';
 
 export default class ProductList extends React.Component {
   constructor(props) {
@@ -51,6 +51,7 @@ export default class ProductList extends React.Component {
     } = this.state;
     const {
       Product,
+      AddBasket,
       relatedProducts,
       setMainProductId,
       listTitle,
@@ -70,6 +71,7 @@ export default class ProductList extends React.Component {
           <InnerListWrapper ref={this.listref}>
             {relatedProducts.map((p) => (
               <Product
+                AddBasket={AddBasket}
                 key={p.id}
                 id={p.id}
                 productName={p.product_name}
