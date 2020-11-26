@@ -6,6 +6,7 @@ import GlobalStyle, { AppWrapper } from './globalStyles';
 import ProductList from './components/ProductList/ProductList.jsx';
 import Product from './components/Product/Product.jsx';
 import AddBasket from './components/AddBasket/AddBasket.jsx';
+import StarRatings from './components/StarRatings/StarRatings.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class App extends React.Component {
       relatedDescriptions: [],
       relatedCollection: [],
     };
-
     this.setMainProductId = this.setMainProductId.bind(this);
   }
 
@@ -62,28 +62,35 @@ class App extends React.Component {
 
   render() {
     const { mainProductId, relatedDescriptions, relatedCollection } = this.state;
-
     return (
-      <AppWrapper>
+      <div>
         <GlobalStyle />
-        <ProductList
-          Product={Product}
-          AddBasket={AddBasket}
-          listTitle="Similar products"
-          mainProductId={mainProductId}
-          relatedProducts={relatedDescriptions}
-          setMainProductId={this.setMainProductId}
-          style
-        />
-        <ProductList
-          Product={Product}
-          AddBasket={AddBasket}
-          listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
-          mainProductId={mainProductId}
-          relatedProducts={relatedCollection}
-          setMainProductId={this.setMainProductId}
-        />
-      </AppWrapper>
+        <AppWrapper>
+          <div>
+            <ProductList
+              Product={Product}
+              AddBasket={AddBasket}
+              StarRatings={StarRatings}
+              listTitle="Similar products"
+              mainProductId={mainProductId}
+              relatedProducts={relatedDescriptions}
+              setMainProductId={this.setMainProductId}
+              style
+            />
+          </div>
+          <div>
+            <ProductList
+              Product={Product}
+              AddBasket={AddBasket}
+              StarRatings={StarRatings}
+              listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
+              mainProductId={mainProductId}
+              relatedProducts={relatedCollection}
+              setMainProductId={this.setMainProductId}
+            />
+          </div>
+        </AppWrapper>
+      </div>
     );
   }
 }

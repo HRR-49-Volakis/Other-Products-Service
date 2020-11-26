@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
 
-const mainProduct = '55';
+const mainProduct = '33';
 ReactDOM.render(
   <App
     mainProductId={mainProduct}

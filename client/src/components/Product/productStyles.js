@@ -22,11 +22,10 @@ export const ProductAnchorWrapper = styled.a`
 
 export const ProductWrapper = styled.div`
   display: grid;
-  grid-template-rows: auto;
+  grid-template-rows: 30px 300px 75px;
   width: 175px;
-  height: 450px;
-  padding: 5px;
-
+  height: 405px;
+  margin: 5px;
   position: relative;
 `;
 
@@ -43,7 +42,7 @@ export const ImageOne = styled.img`
   width:175px;
   height:175px;
 
-  animation: ${(props) => (props.hovering ? 'fadeout .5s forwards' : 'fadein .5s forwards')};
+  animation: ${(props) => (props.hovering ? 'fadeout .5s ease forwards' : 'fadein .5s ease forwards')};
   @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -89,9 +88,8 @@ export const ProductDescription = styled.div`
   font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+
   color: #484848;
-  margin-bottom: 5px;
   cursor: pointer;
 `;
 
@@ -105,44 +103,6 @@ export const ProductPrice = styled.div`
     content: "$";
     font-size: 12px;
     vertical-align:40%;
-  }
-  cursor: pointer;
-`;
-
-export const StarIcon = styled.path.attrs({
-  d: 'M12.003 4L14.8623 8.9091L20.4147 10.1115L16.6294 14.3478L17.2017 20L12.003 17.7091L6.80429 20L7.37657 14.3478L3.59131 10.1115L9.14371 8.9091L12.003 4Z',
-})`
-  fill: ${(props) => (props.filled ? '#000' : '#DFDFDF')};
-`;
-
-export const HalfEmptyStarIcon = styled.path.attrs({
-  d: 'M17.1986 20L11.9999 17.7091V4L14.8592 8.9091L20.4116 10.1115L16.6264 14.3478L17.1986 20Z',
-})`
-  fill: #DFDFDF;
-`;
-export const HalfFilledStarIcon = styled.path.attrs({
-  d: 'M6.80136 20L12.0001 17.7091V4L9.14078 8.9091L3.58838 10.1115L7.37364 14.3478L6.80136 20Z',
-})`
-  fill: #000;
-`;
-
-export const Stars = styled.div`
-  cursor: pointer;
-  display: flex;
-  height: 25px;
-  width: 100px;
-  cursor: pointer;
-`;
-
-export const ProductRatingCount = styled.div`
-  font-family: sans-serif;
-  letter-spacing: 0;
-  font-weight: 400;
-  font-size: 12px;
-  color: #484848;
-  padding-top: 5px;
-  &:hover {
-    text-decoration:underline;
   }
   cursor: pointer;
 `;
@@ -164,7 +124,9 @@ export const HeartIconOutLine = styled.path.attrs({
   'clip-rule': 'evenodd',
 })`
   position absolute;
-  fill: ${(props) => (props.hovering ? 'rgb(118, 118, 118)' : 'none')};
+  fill: 'rgb(118, 118, 118)';
+  opacity: ${(props) => (props.hovering ? '1' : '0')};
+  transition: opacity .5s ease;
   &:hover {
     fill: ${(props) => (props.liked ? 'rgb(59, 59, 59)' : 'rgb(118, 118, 118)')};
   }
@@ -177,13 +139,14 @@ export const HeartIcon = styled.path.attrs({
 })`
   position: absolute;
   fill: ${(props) => (props.liked ? 'rgb(118, 118, 118)' : 'none')};
-
-
-  /* stroke: ${(props) => (props.hovering ? 'rgb(118, 118, 118)' : 'none')}; */
-
   &:hover {
     fill: ${(props) => (props.liked ? 'rgb(59, 59, 59)' : 'rgb(118, 118, 118)')};
     stroke: ${(props) => (props.hovering ? 'rgb(59, 59, 59)' : 'rgb(255,255,255)')};
     fill: rgb(59, 59, 59)
   }
+`;
+
+export const PriceRatingsBasketWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
 `;

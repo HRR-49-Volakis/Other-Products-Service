@@ -8,7 +8,6 @@ import {
   OuterBasketWrapper,
 } from './basketStyle';
 
-// hook componenets
 function CirclCheckAnimation() {
   const [showCheck, setShowCheck] = useState(false);
   useEffect(() => {
@@ -39,7 +38,7 @@ function AddBasket({ hovering }) {
         {added ? (
           <CirclCheckAnimation />
         ) : (
-          <svg focusable="false" width="100%" height="100%" viewBox="0 0 24 24">
+          <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
             <BasketIcon />
           </svg>
         ) }

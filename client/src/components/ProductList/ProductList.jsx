@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ListTitle,
   ArrowListWrapper,
+  InnerArrowWrapper,
 } from './productListStyles';
 
 export default class ProductList extends React.Component {
@@ -24,15 +25,11 @@ export default class ProductList extends React.Component {
   }
 
   handleMouseOver() {
-    this.setState({
-      hovering: true,
-    });
+    this.setState({ hovering: true });
   }
 
   handleMouseOut() {
-    this.setState({
-      hovering: false,
-    });
+    this.setState({ hovering: false });
   }
 
   scrollright() {
@@ -55,6 +52,7 @@ export default class ProductList extends React.Component {
       relatedProducts,
       setMainProductId,
       listTitle,
+      StarRatings,
     } = this.props;
     return (
       <OuterListWrapper>
@@ -66,12 +64,17 @@ export default class ProductList extends React.Component {
           onBlur={this.handleMouseOut}
         >
           <ArrowWrapper onClick={this.scrollleft} hovering={hovering}>
-            <ArrowLeft hovering={hovering} />
+            <InnerArrowWrapper>
+              <svg viewBox="0 0 24 24">
+                <ArrowLeft />
+              </svg>
+            </InnerArrowWrapper>
           </ArrowWrapper>
           <InnerListWrapper ref={this.listref}>
             {relatedProducts.map((p) => (
               <Product
                 AddBasket={AddBasket}
+                StarRatings={StarRatings}
                 key={p.id}
                 id={p.id}
                 productName={p.product_name}
@@ -87,7 +90,11 @@ export default class ProductList extends React.Component {
             ))}
           </InnerListWrapper>
           <ArrowWrapper onClick={this.scrollright} hovering={hovering}>
-            <ArrowRight hovering={hovering} />
+            <InnerArrowWrapper>
+              <svg viewBox="0 0 24 24">
+                <ArrowRight />
+              </svg>
+            </InnerArrowWrapper>
           </ArrowWrapper>
         </ArrowListWrapper>
       </OuterListWrapper>
