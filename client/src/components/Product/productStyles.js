@@ -87,6 +87,7 @@ export const ProductDescription = styled.div`
   font-weight: 400;
   font-size: 14px;
   text-overflow: ellipsis;
+
   white-space: nowrap;
 
   color: #484848;

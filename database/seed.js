@@ -35,7 +35,7 @@ function generateFakeData(model) {
     const unfinishedData = {
       product_name: name,
       page_url: 'https://www.ikea.com/au/en/p/djungelskog-soft-toy-brown-bear-20402831/',
-      price: (faker.random.number(40) * 5),
+      price: ((faker.random.number(40) * 5) + 10),
       hearted: faker.random.boolean(),
       brief_description: description,
       collection_name: faker.commerce.department(),
