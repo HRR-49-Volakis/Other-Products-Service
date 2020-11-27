@@ -26,23 +26,19 @@ export default class Product extends React.Component {
   }
 
   handleMouseOver() {
-    console.log('product mouseover');
     this.setState({ hovering: true });
   }
 
   handleMouseOut() {
-    console.log('product mouseout');
     this.setState({ hovering: false });
   }
 
   handleChangeId(id) {
-    console.log('handle change clicked');
     const { setMainProductId } = this.props;
     setMainProductId(id);
   }
 
   handleHeartClick() {
-    console.log('handle hearticon clicked');
     const { liked } = this.state;
     this.setState({ liked: !liked });
   }
