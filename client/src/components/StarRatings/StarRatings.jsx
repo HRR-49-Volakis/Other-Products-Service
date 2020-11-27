@@ -70,7 +70,9 @@ function StarRatings({ id }) {
 
   return (
     <Stars>
-      {[1, 2, 3, 4, 5].map((num) => (<Star value={(avgRatings - num) + 2} delay={num} />))}
+      {[1, 2, 3, 4, 5].map((num) => (
+        <Star key={num} value={(avgRatings - num) + 2} delay={num} />
+      ))}
       <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
     </Stars>
   );

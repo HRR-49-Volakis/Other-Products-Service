@@ -4,7 +4,6 @@ const SRC = path.join(__dirname, '/client/src/');
 const PUBLIC = path.join(__dirname, '/public/');
 
 module.exports = {
-  // mode: 'development',
   entry: `${SRC}index.jsx`,
   output: {
     filename: 'bundle.js',

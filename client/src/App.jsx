@@ -21,38 +21,31 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getRelatedDescription();
-    this.getRelatedCollection();
+    const { mainProductId } = this.state;
+    this.getRelatedProducts(mainProductId);
   }
 
   setMainProductId(id) {
-    console.log('send id=', id);
-    this.setState({
-      mainProductId: id,
-    });
-    this.getRelatedDescription();
-    this.getRelatedCollection();
+    console.log('got id= ', id);
+    this.getRelatedProducts(id);
   }
 
-  getRelatedCollection() {
-    const { mainProductId } = this.state;
-    axios.get(`/api/product_scroller/products/collection/id=${mainProductId}`)
+  getRelatedProducts(id) {
+    let tempCollection;
+    let tempDescription;
+    axios.get(`/api/product_scroller/products/collection/id=${id}`)
       .then((res) => {
-        this.setState({
-          relatedCollection: res.data,
-        });
+        tempCollection = res.data;
+        return axios.get(`/api/product_scroller/products/similar/id=${id}`);
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
-
-  getRelatedDescription() {
-    const { mainProductId } = this.state;
-    axios.get(`/api/product_scroller/products/similar/id=${mainProductId}`)
       .then((res) => {
+        tempDescription = res.data;
+      })
+      .then(() => {
         this.setState({
-          relatedDescriptions: res.data,
+          mainProductId: id,
+          relatedCollection: tempCollection,
+          relatedDescriptions: tempDescription,
         });
       })
       .catch((err) => {
