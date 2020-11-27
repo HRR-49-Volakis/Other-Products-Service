@@ -26,19 +26,23 @@ export default class Product extends React.Component {
   }
 
   handleMouseOver() {
+    console.log('product mouseover');
     this.setState({ hovering: true });
   }
 
   handleMouseOut() {
+    console.log('product mouseout');
     this.setState({ hovering: false });
   }
 
   handleChangeId(id) {
+    console.log('handle change clicked');
     const { setMainProductId } = this.props;
     setMainProductId(id);
   }
 
   handleHeartClick() {
+    console.log('handle hearticon clicked');
     const { liked } = this.state;
     this.setState({ liked: !liked });
   }
@@ -62,9 +66,9 @@ export default class Product extends React.Component {
     return (
       <ProductWrapper
         onMouseOver={this.handleMouseOver}
-        onFocus={this.handleMouseOver}
+        // onFocus={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
-        onBlur={this.handleMouseOut}
+        // onBlur={this.handleMouseOut}
       >
         <HeartWrapper onClick={this.handleHeartClick}>
           <svg focusable="false" width="100%" viewBox="0 0 24 24">
@@ -83,7 +87,7 @@ export default class Product extends React.Component {
         <PriceRatingsBasketWrapper>
           <div>
             <ProductPrice>{`${price}`}</ProductPrice>
-            <StarRatings id={id} style={{ float: 'left' }} />
+            <StarRatings id={id} />
           </div>
           <div>
             <AddBasket hovering={hovering} />

@@ -50,7 +50,7 @@ function Star({ value, delay }) {
   }
 }
 
-function StarRatings({ id }) {
+const StarRatings = React.memo(({ id }) => {
   const [avgRatings, setAvgRatings] = useState(0);
   const [countRatings, setCountRatings] = useState(0);
 
@@ -69,13 +69,13 @@ function StarRatings({ id }) {
   });
 
   return (
-    <Stars>
+    <Stars style={{ float: 'left' }}>
       {[1, 2, 3, 4, 5].map((num) => (
         <Star key={num} value={(avgRatings - num) + 2} delay={num} />
       ))}
       <ProductRatingCount>{`(${countRatings})`}</ProductRatingCount>
     </Stars>
   );
-}
+});
 
 export default StarRatings;
