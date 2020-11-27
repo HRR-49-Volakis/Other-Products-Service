@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   CheckMark,
   Circle,
-  CheckMarkWrapper,
+
   BasketIcon,
   BasketWrapper,
   OuterBasketWrapper,
+  IconScaleWrapper,
 } from './basketStyle';
 
 function CirclCheckAnimation() {
@@ -16,11 +17,11 @@ function CirclCheckAnimation() {
   return (
     <div>
       { showCheck ? (
-        <CheckMarkWrapper>
+        <IconScaleWrapper>
           <svg viewBox="0 0 48 48">
             <CheckMark />
           </svg>
-        </CheckMarkWrapper>
+        </IconScaleWrapper>
       ) : (
         <svg viewBox="0 0  500 500">
           <Circle />
@@ -38,9 +39,13 @@ function AddBasket({ hovering }) {
         {added ? (
           <CirclCheckAnimation />
         ) : (
-          <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            <BasketIcon />
-          </svg>
+          <IconScaleWrapper>
+            <svg width="27.421219" height="21.03437" viewBox="0 0 27.421219 21.03437">
+              <g transform="translate(-92.589711,-142.18846)">
+                <BasketIcon />
+              </g>
+            </svg>
+          </IconScaleWrapper>
         ) }
       </BasketWrapper>
     </OuterBasketWrapper>
