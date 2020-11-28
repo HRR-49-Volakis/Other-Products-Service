@@ -21,4 +21,9 @@ module.exports = {
       },
     }],
   },
+  // optimization: {
+  //   runtimeChunk: {
+  //     name: 'vendor',
+  //   },
+  // },
 };

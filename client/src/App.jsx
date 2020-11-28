@@ -56,34 +56,29 @@ class App extends React.Component {
   render() {
     const { mainProductId, relatedDescriptions, relatedCollection } = this.state;
     return (
-      <div>
+
+      <AppWrapper>
         <GlobalStyle />
-        <AppWrapper>
-          <div>
-            <ProductList
-              Product={Product}
-              AddBasket={AddBasket}
-              StarRatings={StarRatings}
-              listTitle="Similar products"
-              mainProductId={mainProductId}
-              relatedProducts={relatedDescriptions}
-              setMainProductId={this.setMainProductId}
-              style
-            />
-          </div>
-          <div>
-            <ProductList
-              Product={Product}
-              AddBasket={AddBasket}
-              StarRatings={StarRatings}
-              listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
-              mainProductId={mainProductId}
-              relatedProducts={relatedCollection}
-              setMainProductId={this.setMainProductId}
-            />
-          </div>
-        </AppWrapper>
-      </div>
+        <ProductList
+          Product={Product}
+          AddBasket={AddBasket}
+          StarRatings={StarRatings}
+          listTitle="Similar products"
+          mainProductId={mainProductId}
+          relatedProducts={relatedDescriptions}
+          setMainProductId={this.setMainProductId}
+          style
+        />
+        <ProductList
+          Product={Product}
+          AddBasket={AddBasket}
+          StarRatings={StarRatings}
+          listTitle={`More in the ${relatedCollection[0] ? relatedCollection[0].collection_name : ''} collection`}
+          mainProductId={mainProductId}
+          relatedProducts={relatedCollection}
+          setMainProductId={this.setMainProductId}
+        />
+      </AppWrapper>
     );
   }
 }
