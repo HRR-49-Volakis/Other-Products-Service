@@ -2,12 +2,13 @@ import React from 'react';
 import {
   OuterListWrapper,
   InnerListWrapper,
-  ArrowWrapper,
   ArrowRight,
   ArrowLeft,
   ListTitle,
   ArrowListWrapper,
   InnerArrowWrapper,
+  LeftArrowWrapper,
+  RightArrowWrapper,
 } from './productListStyles';
 
 export default class ProductList extends React.Component {
@@ -63,13 +64,13 @@ export default class ProductList extends React.Component {
           onMouseOut={this.handleMouseOut}
           onBlur={this.handleMouseOut}
         >
-          <ArrowWrapper onClick={this.scrollleft} hovering={hovering}>
+          <RightArrowWrapper onClick={this.scrollright} hovering={hovering}>
             <InnerArrowWrapper>
               <svg viewBox="0 0 24 24">
-                <ArrowLeft />
+                <ArrowRight />
               </svg>
             </InnerArrowWrapper>
-          </ArrowWrapper>
+          </RightArrowWrapper>
           <InnerListWrapper ref={this.listref}>
             {relatedProducts.map((p) => (
               <Product
@@ -89,13 +90,13 @@ export default class ProductList extends React.Component {
               />
             ))}
           </InnerListWrapper>
-          <ArrowWrapper onClick={this.scrollright} hovering={hovering}>
+          <LeftArrowWrapper onClick={this.scrollleft} hovering={hovering}>
             <InnerArrowWrapper>
               <svg viewBox="0 0 24 24">
-                <ArrowRight />
+                <ArrowLeft />
               </svg>
             </InnerArrowWrapper>
-          </ArrowWrapper>
+          </LeftArrowWrapper>
         </ArrowListWrapper>
       </OuterListWrapper>
     );

@@ -62,9 +62,9 @@ export default class Product extends React.Component {
     return (
       <ProductWrapper
         onMouseOver={this.handleMouseOver}
-        // onFocus={this.handleMouseOver}
+        onFocus={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
-        // onBlur={this.handleMouseOut}
+        onBlur={this.handleMouseOut}
       >
         <HeartWrapper onClick={this.handleHeartClick}>
           <svg focusable="false" width="100%" viewBox="0 0 24 24">

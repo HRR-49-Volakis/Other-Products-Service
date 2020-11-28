@@ -21,6 +21,7 @@ export const ProductAnchorWrapper = styled.a`
 `;
 
 export const ProductWrapper = styled.div`
+  box-sizing: border-box;
   display: grid;
   grid-template-rows: 30px 300px 75px;
   width: 175px;

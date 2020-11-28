@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
 export const OuterListWrapper = styled.div`
-  display: grid;
+  box-sizing: border-box;
   grid-template-rows: 35px 432px;
+  grid-gap: 5px;
   width: 850px;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  height: 500px;
 `;
 
 export const ListTitle = styled.div`
   display: block;
+  box-sizing: border-box;
   width: 800px;
   font-size: 1.375rem;
   line-height: 1.4545454545;
@@ -20,13 +21,15 @@ export const ListTitle = styled.div`
 `;
 
 export const ArrowListWrapper = styled.div`
+
+  position:absolute;
   width:804px;
-  height:400px;
   display: grid;
-  grid-template-columns: 40px 744px 40px;
+  grid-template-columns: 42px 744px 42px;
 `;
 
 export const InnerListWrapper = styled.div`
+  grid-column: 2/3;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   font-size: 12px;
@@ -36,6 +39,7 @@ export const InnerListWrapper = styled.div`
   transform: translateX: (+1);
   scroll-behavior: smooth;
   cursor: auto;
+  position:absolute;
 
   &::-webkit-scrollbar {
     height: 2px;
@@ -61,10 +65,26 @@ export const InnerListWrapper = styled.div`
   }
 `;
 
-export const ArrowWrapper = styled.div`
-  maring:2px;
-  position: relative;
-  margin-top: 175px;
+export const LeftArrowWrapper = styled.div`
+  grid-column: 1/3;
+
+  position: absolute;
+  margin-top: 200px;
+  z-index: 8;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  background-color: ${(props) => (props.hovering ? 'black' : 'rgba(0, 0, 0, 0.0)')};
+  transition: background-color .5s;
+  &:hover {
+    opacity: 0.5
+  }
+`;
+export const RightArrowWrapper = styled.div`
+  grid-column: 3/3;
+  margin-top: 200px;
+  position: absolute;
   z-index: 8;
   border-radius: 50%;
   cursor: pointer;

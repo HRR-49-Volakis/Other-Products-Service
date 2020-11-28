@@ -11,7 +11,7 @@ export default createGlobalStyle`
 
 export const AppWrapper = styled.div`
   display: grid;
-  grid-template-rows: 450px 450px;
+  grid-template-rows: 500px 500px;
   width: 850px;
   grid-gap: 100px;
 `;
