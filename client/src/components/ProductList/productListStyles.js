@@ -35,7 +35,7 @@ export const InnerListWrapper = styled.div`
   font-size: 12px;
   height: 430px;
   width: 740px;
-  overflow: auto;
+  overflow-x: scroll;
   transform: translateX: (+1);
   scroll-behavior: smooth;
   cursor: auto;
