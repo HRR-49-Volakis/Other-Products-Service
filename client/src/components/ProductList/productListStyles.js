@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const OuterListWrapper = styled.div`
-  display: block;
-  position: relative;
-  margin-top: 50px;
+  display: grid;
+  grid-template-rows: 35px 432px;
+  width: 850px;
   margin-top: 20px;
   margin-bottom: 50px;
 `;
