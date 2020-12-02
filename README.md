@@ -41,7 +41,7 @@ npm install
 URLs prefixed with /api/product_scroller
 
 | Action          | Method           | URL   |
-| :-------------: |:----------------:|:-----:|
+| :------------- |:----------------:|:-----|
 | Create a new product | POST | /product |
 | Retrieve similar products  | GET | /products/similar/id=:id |
 | Retrieve products in the same collection | GET | /products/collection/id=:id |
