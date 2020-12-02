@@ -8,7 +8,7 @@ const usersModel = require('../server/models/users.js');
 const imagePool = require('./imagePool.js');
 
 const user = 'root';
-const pass = 'cheeze';
+const pass = '';
 
 function addRandomImagePair(data) {
   const keys = Object.keys(imagePool);
@@ -47,7 +47,7 @@ function generateFakeData(model) {
 
 function initEmptyDb() {
   return new Promise((resolve, reject) => {
-    exec(`mysql -u ${user} < database/schema.sql -p${pass}`, (error, stdout, stderr) => {
+    exec(`mysql -u ${user} < database/schema.sql -p ${pass}`, (error, stdout, stderr) => {
       if (error) return reject(error);
       if (stderr) return reject(error);
       return resolve(`stdout: ${stdout}`);
