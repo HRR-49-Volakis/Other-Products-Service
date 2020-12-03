@@ -30,9 +30,6 @@ CREATE TABLE ratings (
 
 ALTER TABLE ratings ADD FOREIGN KEY (rated_product) REFERENCES products(id);
 ALTER TABLE ratings ADD FOREIGN KEY (user_id) REFERENCES users(id);
-
---create a FULLTEXT index to match product descriptsion
---https://database.guide/how-the-match-function-works-in-mysql/#:~:text=In%20MySQL%2C%20the%20MATCH(),table%20columns%20to%20be%20searched.
 ALTER TABLE products ADD FULLTEXT(brief_description);
 
 
