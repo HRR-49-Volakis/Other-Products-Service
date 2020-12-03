@@ -74,10 +74,64 @@ function getSimilarCollection(id) {
   });
 }
 
+// post
+function addProduct(data) {
+  const values = [
+    data.product_name,
+    data.image_one_url,
+    data.image_two_url,
+    data.page_url,
+    data.price,
+    data.hearted,
+    data.brief_description,
+    data.collection_name,
+  ];
+  const queryStr = `
+    INSERT INTO products
+    (product_name, image_one_url, image_two_url,
+      page_url, price,hearted, brief_description,
+      collection_name)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
+  return new Promise((resolve, reject) => {
+    connection.query(queryStr, values, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
+    });
+  });
+}
+
+// update
+function updateProduct(id, data) {
+  const values = [
+    data.column_name,
+    data.new_value
+  ];
+  const queryStr = `UPDATE products SET ${data.column_name} = ${data.new_value} WHERE id = ${id}`;
+  return new Promise((resolve, reject) => {
+    connection.query(queryStr, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
+    })
+  })
+}
+
+// delete
+function deleteProduct(id) {
+  const queryStr = `DELETE FROM products WHERE id = ${id}`;
+  return new Promise((resolve, reject) => {
+    connection.query(queryStr, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
+    })
+  })
+}
+
 module.exports = {
   createProduct,
   getAll,
   getById,
   getSimilarDescription,
   getSimilarCollection,
+  addProduct,
+  updateProduct
 };
