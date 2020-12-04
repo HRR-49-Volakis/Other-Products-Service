@@ -4,7 +4,6 @@ const { connection } = require('./db.js');
 
 const productsModel = require('../server/models/products.js');
 const ratingsModel = require('../server/models/ratings.js');
-const usersModel = require('../server/models/users.js');
 const imagePool = require('./imagePool.js');
 
 const user = 'root';
@@ -23,7 +22,6 @@ function generateFakeData(model) {
   let data;
   if (model === 'rating') {
     data = {
-      user_id: faker.random.number({ min: 1, max: 200 }),
       rated_product: faker.random.number({ min: 1, max: 100 }),
       stars_given: faker.random.number({ min: 1, max: 5 }),
     };
@@ -65,15 +63,15 @@ async function seedProducts() {
   return results;
 }
 
-async function seedUsers() {
-  const results = [];
-  for (let i = 0; i < 200; i += 1) {
-    const data = generateFakeData('user');
-    const result = await usersModel.createUser(data);
-    results.push(result);
-  }
-  return results;
-}
+// async function seedUsers() {
+//   const results = [];
+//   for (let i = 0; i < 200; i += 1) {
+//     const data = generateFakeData('user');
+//     const result = await usersModel.createUser(data);
+//     results.push(result);
+//   }
+//   return results;
+// }
 
 async function seedRatings() {
   const results = [];
@@ -87,7 +85,6 @@ async function seedRatings() {
 
 initEmptyDb()
   .then(() => seedProducts()) // console.log('initialized empty ikea database', result);
-  .then(() => seedUsers()) // console.log('successfully added ', results.length, 'products');
   .then(() => seedRatings())// console.log('successfully added ',results.length, 'users');
   .catch((err) => {
     throw err;
