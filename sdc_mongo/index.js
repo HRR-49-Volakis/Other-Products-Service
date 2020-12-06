@@ -1,6 +1,5 @@
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
-const ratings = require('./schema.js');
 const url = 'mongodb://localhost/sliders';
 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {

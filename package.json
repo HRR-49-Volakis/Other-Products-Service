@@ -11,6 +11,8 @@
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.3",
     "mysql": "^2.18.1",
+    "pg": "^8.5.1",
+    "pg-format": "^1.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "save-dev": "0.0.1-security",
@@ -46,7 +48,9 @@
     "build:dev": "webpack --config webpack.config.js -w",
     "build": "webpack --config webpack.config.js",
     "seed": "node ./database/seed.js",
-    "lint": "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint",
+    "seed:mongo": "node ./sdc_mongo/seed.js",
+    "load:mongo": "mongoimport --db scrollers --collection products --type csv --headerline --file ./sdc_mongo/products.csv"
   },
   "repository": {
     "type": "git",
