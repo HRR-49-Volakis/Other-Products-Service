@@ -64,7 +64,7 @@ const randomProduct = function () {
   var page_url = 'https://www.ikea.com/au/en/p/djungelskog-soft-toy-brown-bear-20402831/';
   var price = ((faker.random.number(40) * 5) + 10);
   var hearted = faker.random.boolean();
-  var brief_description = `${faker.commerce.productAdjective()} ${faker.commerce.productMaterial()}, ${faker.random.number(50)} cm`;
+  var brief_description = `${faker.commerce.productAdjective()} ${faker.commerce.productMaterial()} ${faker.random.number(50)} cm`;
   var collection_name = faker.commerce.department();
 
   data += product_name + ',' + image_one_url + ',' + image_two_url + ',' + page_url + ',' + price + ',' + hearted + ',' + brief_description + ',' + collection_name + '\n';
