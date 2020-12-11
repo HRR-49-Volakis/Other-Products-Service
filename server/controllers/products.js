@@ -38,8 +38,8 @@ function getSimilarCollection(req, res) {
 
 // post
 function addProduct(req, res) {
-  productsModel.addProduct(req.params.body)
-    .then(console.log('new product added in db'))
+  productsModel.addProduct(req.body)
+    .then(console.log('SUCCESS in addition'))
     .catch((err) => {
       res.status(400);
       res.send(err);
@@ -48,8 +48,8 @@ function addProduct(req, res) {
 
 // update
 function updateProduct(req, res) {
-  productsModel.updateProduct(req.params.id, req.params.body)
-    .then(console.log('product information updated'))
+  productsModel.updateProduct(req.params.id, req.body)
+    .then(console.log('SUCCESS in update'))
     .catch((err) => {
       res.status(400);
       res.send(err);
@@ -59,7 +59,7 @@ function updateProduct(req, res) {
 //delete
 function deleteProduct(req, res) {
   productsModel.deleteProduct(req.params.id)
-    .then(console.log('product deleted'))
+    .then(console.log('SUCCESS in deletion'))
     .catch((err) => {
       res.status(400);
       res.send(err);

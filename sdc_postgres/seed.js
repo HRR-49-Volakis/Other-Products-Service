@@ -7,17 +7,14 @@ function generateCSV (writer, func, header, encoding, callback) {
 
   var lines = 10000000;
   var data;
-  var id = 0;
 
   writer.write(header, encoding);
 
   function write () {
     var ok = true;
     do {
-      id++;
       lines--;
-      var id_str = id.toString();
-      data = id_str + ',' + func();
+      data = func();
       if (lines === 0) {
         writer.write(data, encoding, callback);
       } else {
@@ -78,10 +75,10 @@ function complete () {
 
 //----ratings------------
 var ratingWriter = fs.createWriteStream('./ratings.csv');
-var ratingHeader = 'id, rated_product, stars_given\n';
+var ratingHeader = 'rated_product, stars_given\n';
 generateCSV(ratingWriter, randomRating, ratingHeader, 'utf-8', complete);
 
 //------products-------------
 var productWriter = fs.createWriteStream('./products.csv');
-var productHeader = 'id, product_name, image_one_url, image_two_url, page_url, price, hearted, brief_description, collection_name\n';
+var productHeader = 'product_name, image_one_url, image_two_url, page_url, price, hearted, brief_description, collection_name\n';
 generateCSV(productWriter, randomProduct, productHeader, 'utf-8', complete);
