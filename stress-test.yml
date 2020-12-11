@@ -1,0 +1,22 @@
+config:
+  target: "http://localhost:3001"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: Warm up
+scenarios:
+  - name: "POST"
+    flow:
+     - post:
+         url: "/api/product_scroller/product"
+         json:
+           product_name: "TEST product"
+           image_one_url: "TEST url"
+           image_two_url: "TEST url2"
+           page_url: "TEST page url"
+           price: 90.30
+           hearted: "f"
+           brief_description: "short description for test"
+           collection_name: "TEST TEST TEST"
+
+

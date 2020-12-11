@@ -1,4 +1,4 @@
-// const { connection } = require('../../database/db.js');
+const { connection } = require('../../database/db.js');
 // const { Rating, Product } = require('../../sdc_mongo/index.js');
 const { pool } = require('../../sdc_postgres/index.js');
 

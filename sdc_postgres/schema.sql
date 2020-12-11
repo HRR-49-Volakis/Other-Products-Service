@@ -21,6 +21,8 @@ CREATE TABLE ratings (
   stars_given int not null
 );
 
+CREATE INDEX idx_brief_description ON products(brief_description);
+
 COPY ratings(rated_product, stars_given)
 FROM '/Users/alysashin/Desktop/SDC/other-products-scroll/sdc_postgres/ratings.csv'
 DELIMITER ','

@@ -39,7 +39,7 @@ function getSimilarCollection(req, res) {
 // post
 function addProduct(req, res) {
   productsModel.addProduct(req.body)
-    .then(console.log('SUCCESS in addition'))
+    .then(() => {})
     .catch((err) => {
       res.status(400);
       res.send(err);
