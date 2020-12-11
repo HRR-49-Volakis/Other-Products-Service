@@ -1,4 +1,7 @@
-const { connection } = require('../../database/db.js');
+// const { connection } = require('../../database/db.js');
+// const { Rating, Product } = require('../../sdc_mongo/index.js');
+const { pool } = require('../../sdc_postgres/index.js');
+
 
 function createProduct(data) {
   const values = [
@@ -46,33 +49,81 @@ function getById(id) {
   });
 }
 
-function getSimilarDescription(id) {
-  const firstStatement = 'SELECT brief_description FROM products WHERE id=?;';
-  const secondStatement = 'SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?) LIMIT 12;';
+// og: mysql
+// function getSimilarDescription(id) {
+//   const firstStatement = 'SELECT brief_description FROM products WHERE id=?;';
+//   const secondStatement = 'SELECT * FROM products WHERE MATCH(brief_description) AGAINST(?) LIMIT 12;';
+//   return new Promise((resolve, reject) => {
+//     connection.query(firstStatement, [id], (err, [product]) => {
+//       if (err) return reject(err);
+//       return connection.query(secondStatement, [product.brief_description], (error, result) => {
+//         if (error) return reject(err);
+//         return resolve(result);
+//       });
+//     });
+//   });
+// }
+
+// original: mysql
+// function getSimilarCollection(id) {
+//   const firstStatement = 'SELECT collection_name FROM products WHERE id=?;';
+//   const secondStatement = 'SELECT * FROM products WHERE collection_name=? LIMIT 12;';
+//   return new Promise((resolve, reject) => {
+//     connection.query(firstStatement, [id], (err, [product]) => {
+//       if (err) return reject(err);
+//       return connection.query(secondStatement, [product.collection_name], (error, result) => {
+//         if (error) return reject(err);
+//         return resolve(result);
+//       });
+//     });
+//   });
+// }
+
+// //MONGO:getSimilarCollection(id)
+// function getSimilarCollection(input) {
+//   // var queryParam = {};
+//   // queryParam.id = Number(input);
+//   // console.log('====queryParam', queryParam);
+
+//   // var query = Product.find(queryParam).select({collection_name: 1});
+
+//   // var query = Product.find(queryParam, {collection_name: 1})
+
+//   // console.log('====query===', query);
+
+//   return new Promise((resolve, reject) => {
+//     Product.find({id: input}, function (err, docs) {
+//       console.log('=====', docs);
+//       if (err) return reject(err);
+//       return resolve(docs);
+//     });
+//   })
+
+
+// POSTGRES:getSimilarCollection(id)
+function getSimilarCollection(id) {
+  const queryStr = `SELECT * FROM products WHERE collection_name=(SELECT collection_name FROM products WHERE id=$1) LIMIT 12;`;
+
   return new Promise((resolve, reject) => {
-    connection.query(firstStatement, [id], (err, [product]) => {
+    pool.query(queryStr, [id], (err, result) => {
       if (err) return reject(err);
-      return connection.query(secondStatement, [product.brief_description], (error, result) => {
-        if (error) return reject(err);
-        return resolve(result);
+      return resolve(result.rows);
       });
     });
-  });
 }
 
-function getSimilarCollection(id) {
-  const firstStatement = 'SELECT collection_name FROM products WHERE id=?;';
-  const secondStatement = 'SELECT * FROM products WHERE collection_name=? LIMIT 12;';
+function getSimilarDescription(id) {
+  const queryStr = `SELECT * FROM products WHERE brief_description IN (SELECT brief_description FROM products WHERE id=$1) LIMIT 12;`;
+
   return new Promise((resolve, reject) => {
-    connection.query(firstStatement, [id], (err, [product]) => {
+    pool.query(queryStr, [id], (err, result) => {
       if (err) return reject(err);
-      return connection.query(secondStatement, [product.collection_name], (error, result) => {
-        if (error) return reject(err);
-        return resolve(result);
-      });
-    });
-  });
+      return resolve(result.rows);
+    })
+  })
 }
+
+
 
 // post
 function addProduct(data) {
@@ -89,11 +140,11 @@ function addProduct(data) {
   const queryStr = `
     INSERT INTO products
     (product_name, image_one_url, image_two_url,
-      page_url, price,hearted, brief_description,
+      page_url, price, hearted, brief_description,
       collection_name)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
   return new Promise((resolve, reject) => {
-    connection.query(queryStr, values, (err, result) => {
+    pool.query(queryStr, values, (err, result) => {
       if (err) return reject(err);
       return resolve(result);
     });
@@ -102,13 +153,16 @@ function addProduct(data) {
 
 // update
 function updateProduct(id, data) {
+  console.log('-----id', id);
+  console.log('-------data', data);
   const values = [
-    data.column_name,
-    data.new_value
+    data.new_value,
+    id
   ];
-  const queryStr = `UPDATE products SET ${data.column_name} = ${data.new_value} WHERE id = ${id}`;
+
+  const queryStr = `UPDATE products SET price=$1 WHERE id=$2`;
   return new Promise((resolve, reject) => {
-    connection.query(queryStr, (err, result) => {
+    pool.query(queryStr, values, (err, result) => {
       if (err) return reject(err);
       return resolve(result);
     })
@@ -117,9 +171,9 @@ function updateProduct(id, data) {
 
 // delete
 function deleteProduct(id) {
-  const queryStr = `DELETE FROM products WHERE id = ${id}`;
+  const queryStr = `DELETE FROM products WHERE id=$1`;
   return new Promise((resolve, reject) => {
-    connection.query(queryStr, (err, result) => {
+    pool.query(queryStr, [id], (err, result) => {
       if (err) return reject(err);
       return resolve(result);
     })
@@ -133,5 +187,6 @@ module.exports = {
   getSimilarDescription,
   getSimilarCollection,
   addProduct,
-  updateProduct
+  updateProduct,
+  deleteProduct
 };

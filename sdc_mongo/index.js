@@ -37,37 +37,8 @@ const ratingSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', productSchema);
 const Rating = mongoose.model('Rating', ratingSchema);
 
-// const func = function(values) {
-//   Rating.insertMany(values, function(err, result) {
-//     if (err) {
-//       console.log('ERROR---', err);
-//     } else {
-//       console.log('Documents successfully inserted. Number of insertions: ', result.insertedCount);
-//     }
-//   })
-// }
-
-// const func = function(values) {
-//   Rating.insertMany(values)
-//     .then(function() {
-//       console.log("successful insertions")
-//     })
-//     .catch(function(err) {
-//       console.log('ERROR', err)
-//     })
-// };
-
-
 module.exports = {
   db,
-  // func,
-  Rating
+  Rating,
+  Product
 }
-
-// db.db.dropDatabase(function(err) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log('database dropped');
-  //   }
-  // }
